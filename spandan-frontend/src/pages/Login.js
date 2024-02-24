@@ -92,7 +92,7 @@ export default function Login() {
                             {({ isSubmitting }) => (
                                 <Form>
                                     <Stack spacing={4}>
-                                        <Field name="email" validate={validateEmail}>
+                                        <Field name="email" >
                                             {({ field, form }) => (
                                                 <FormControl
                                                     isInvalid={form.errors.email && form.touched.email}

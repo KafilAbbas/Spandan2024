@@ -128,7 +128,7 @@ const Signup = () => {
     };
 
     return (
-        <Container page_name="Signup">
+        // <Container page_name="Signup">
             <Formik
                 initialValues={{
                     name: '',
@@ -146,7 +146,7 @@ const Signup = () => {
                             <Stack spacing={8} mx={'auto'} minW={'40vw'} py={12} px={6}>
                                 <Stack align={'center'}>
                                     <Heading fontSize={'4xl'} textAlign={'center'}>
-                                        Sign up
+                                        Sign up as Student
                                     </Heading>
                                 </Stack>
                                 <Box
@@ -206,6 +206,7 @@ const Signup = () => {
                                                         <InputRightElement h={'full'}>
                                                             <Button
                                                                 variant={'ghost'}
+                                                                id="button2"
                                                                 onClick={() =>
                                                                     setShowPassword((showPassword) => !showPassword)
                                                                 }
@@ -217,9 +218,9 @@ const Signup = () => {
                                                 </FormControl>
                                             )}
                                         </Field>
-                                        <Field name="password">
+                                        <Field name="confirm_password">
                                             {({ field }) => (
-                                                <FormControl id="password" isRequired>
+                                                <FormControl id="confirm_password" isRequired>
                                                     <FormLabel>Confirm Password</FormLabel>
                                                     <InputGroup>
                                                         <Input rounded="none"
@@ -229,6 +230,7 @@ const Signup = () => {
                                                         />
                                                         <InputRightElement h={'full'}>
                                                             <Button
+                                                            id="button1"
                                                                 variant={'ghost'}
                                                                 onClick={() =>
                                                                     setShowPassword((showPassword) => !showPassword)
@@ -268,7 +270,7 @@ const Signup = () => {
                                             </Field>
                                 
                                         </Stack>
-                                        <HStack spacing={10} pt={2} justifyContent={'center'}> 
+                                        <HStack spacing={10} pt={2} alignSelf={'center'}> 
                                             <Button
                                                 variant={"custom"}
                                                 bg={'yellow.300'}
@@ -286,17 +288,17 @@ const Signup = () => {
                                             >
                                                 Get Otp
                                             </Button>
-                                            <Field placeholder='Otp' justifyContent={'center'}>
+                                            <Field name="Otp" justifyContent={'center'}>
                                                 {({ field, form }) => (
                                                     <FormControl id="Otp" isInvalid={form.errors.Otp && form.touched.Otp}>
-                                                    <FormLabel>OTP</FormLabel>
-                                                    <Input type="text" {...field} border={"2px"} rounded="none" />
+                                                    <Input type="text" {...field} border={"2px"} rounded="none" py={4} width={'30'}/>
                                                     {form.errors.Otp && form.touched.Otp && (
                                                         <FormErrorMessage>{form.errors.Otp}</FormErrorMessage>
                                                     )}
                                                     </FormControl>
                                                 )}
                                             </Field>
+
 
                                         </HStack>
                                         <Stack spacing={10} pt={4}>
@@ -327,7 +329,7 @@ const Signup = () => {
                         </Flex >
                     </Form>)}
             </Formik>
-        </Container >
+        // </Container >
     );
 }
 

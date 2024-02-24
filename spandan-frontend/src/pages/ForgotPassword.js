@@ -76,7 +76,7 @@ export default function ForgotPwd() {
                                     <Formik initialValues={{ email: '' }} onSubmit={handleSubmit}>
                                         {({ isSubmitting }) => (
                                             <Form>
-                                                <Field name="email" validate={validateEmail}>
+                                                <Field name="email">
                                                     {({ field, form }) => (
                                                         <FormControl id="email" isInvalid={form.errors.email && form.touched.email}>
                                                             <FormLabel>Email address</FormLabel>
