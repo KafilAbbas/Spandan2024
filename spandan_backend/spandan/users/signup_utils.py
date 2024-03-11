@@ -17,7 +17,9 @@ def send_otp(email, otp):
         message = f'Your OTP is: {otp}'
         from_email = settings.EMAIL_HOST_USER
         recipient_list = [email]
+        print(subject,message,from_email,recipient_list)
         send_mail(subject, message, from_email, recipient_list)
+        print('hello')
         return True
     except Exception as e:
         # Log the error or handle it accordingly

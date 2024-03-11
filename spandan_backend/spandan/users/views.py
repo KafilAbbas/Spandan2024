@@ -105,6 +105,7 @@ class CustomUserCreate(APIView):
                 
                 # check if the email is already registered or not and the availabitlit of password in request
                 email = request.data.get('email')
+                print(email)
                 if NewUser.objects.filter(email=email).exists():
                     return Response({'error': 'Email address already registered'}, status=status.HTTP_400_BAD_REQUEST)
                 
