@@ -40,12 +40,15 @@ class CustomOtpVerifiy_userCreate(APIView):
 
     def post(self, request):
         try:
+            print("in otp verifier\n")
             serializer = CustomUserSerializer(data=request.data)
+            print("step1\n")
             if serializer.is_valid():
-                
+                print("step2\n")
                 email = request.data.get('email')
                 otp_sent = cache.get(email)
                 otp_recieved = request.data.get('otp')
+                print("step3\n")
                 print(f'otp sent : {otp_sent} and otp_recieved : {otp_recieved}')
 
                 if not otp_recieved:
@@ -98,8 +101,8 @@ class CustomUserCreate(APIView):
 
     def post(self, request):
         try:
-            serializer = CustomUserSerializer(data=request.data)
-            if serializer.is_valid():
+            # serializer = CustomUserSerializer(data=request.data)
+            # if serializer.is_valid():
                 
                 # check if the email is already registered or not and the availabitlit of password in request
                 email = request.data.get('email')
@@ -195,12 +198,28 @@ class CustomUserCreate(APIView):
         try:
             userr = NewUser.objects.get(email=email)
             serializer = CustomUserSerializer(userr)
-            
+            print("heeeeeeelo\n")
             return Response(serializer.data,status = status.HTTP_200_OK)
             
         except Exception as e:
             print(e)
             return Response(data={'error':str(e)},status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+        
+
+
+    def delete(self, request):
+        try:
+            print("hello")
+            email = request.data.get('email')
+            user = NewUser.objects.get(email=email)
+            user.delete()
+            return Response({'message': 'User deleted successfully'}, status=status.HTTP_204_NO_CONTENT)
+        except NewUser.DoesNotExist:
+            return Response({'error': 'User not found'}, status=status.HTTP_404_NOT_FOUND)
+        except Exception as e:
+            return Response({'error': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+
         
 
 

@@ -23,8 +23,10 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('login/',include('login.urls',namespace='login')),
     path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
+
     path('api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'), #use this as login api
     path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
+    
     path('api/user/', include('users.urls', namespace='users')),
     path('api/sports/', include('sports.urls', namespace='sports')),
     path('api/team/', include('team.urls', namespace='team')),

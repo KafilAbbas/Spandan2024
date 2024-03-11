@@ -68,18 +68,26 @@ class NewUser(AbstractBaseUser, PermissionsMixin):
 def password_reset_token_created(sender, instance, reset_password_token, *args, **kwargs):
     print("helllo -------------------------------------------------------")
     print(reset_password_token.user.user_name)
-    print("helllo -------------------------------------------------------")
     # print(sender)
     # print(reset_password_token.user.user_name)
-    email_plaintext_message = " Hi, "+ reset_password_token.user.user_name +" as requested, we have generated a token for resetting credentials. Follow this URL to proceed ahead http://spandan.iiitb.ac.in/change/{}".format(reset_password_token.key)
+    email_plaintext_message = " Hi, "+ reset_password_token.user.user_name +" as requested, we have generated a token for resetting credentials. Follow this URL to proceed ahead http://localhost:3000/change/{}".format(reset_password_token.key)
 
-    send_mail(
-        # title:
-        "Spandan 2023: Login steps ahead for {}".format(reset_password_token.user.user_name),
-        # message:
-        email_plaintext_message,
-        # from:
-        "mail_id",
-        # to:
-        [reset_password_token.user.email]
-    )
+    # spandan.iiitb.ac.in
+    print("helllo -------------------------------------------------------")
+
+    try:
+        send_mail(
+            # title:
+            "Spandan 2023: Login steps ahead for {}".format(reset_password_token.user.user_name),
+            # message:
+            email_plaintext_message,
+            # from:
+            settings.EMAIL_HOST_USER,
+            # "mail_id",
+            # to:
+            [reset_password_token.user.email]
+        )
+    
+    except Exception as e:
+        print("some error occured while sending the mail\n")
+        print(e)
