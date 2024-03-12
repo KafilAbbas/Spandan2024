@@ -61,14 +61,8 @@ class TeamForm(forms.ModelForm):
             print(sport.name, inSportsNames)
 
             if sport.category == "NonMajor":
-                # Adjust NonMajor sports count based on 'Fifa-S' and 'Fifa-D'
-                if ('Fifa-S' in MinorCat and sport.name == 'Fifa-D') or ('Fifa-D' in MinorCat and sport.name == 'Fifa-S'):
-                    max_non_major = 6  # Maximum 5 sports including 'Fifa-S' or 'Fifa-D'
-                else:
-                    max_non_major = 5  # Maximum 6 sports if both 'Fifa-S' and 'Fifa-D' are present
-
-                if len(MinorCat) >= max_non_major:
-                    retst = f"Given team member: {member.user_name} is already in {max_non_major} non-major sports"
+                if len(MinorCat) >= 5:
+                    retst = f"Given team member: {member.user_name} is already in 5 non-major sports"
                     print(retst)
                     raise forms.ValidationError(retst)
 
