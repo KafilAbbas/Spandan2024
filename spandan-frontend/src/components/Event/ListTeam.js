@@ -12,6 +12,7 @@ import {
     AlertDialogFooter,
 } from '@chakra-ui/react';
 import axios from '../../AxiosConfig';
+import { useNavigate } from 'react-router-dom';
 
 const ListTeam = ({ sport_id, team }) => {
     let players = team[0]["members"]
@@ -20,7 +21,7 @@ const ListTeam = ({ sport_id, team }) => {
     const [isLoading, setIsLoading] = useState(false);
     const onClose = () => setIsOpen(false);
     const cancelRef = useRef();
-
+    const navigate = useNavigate();
     // Post delete redirect back to the page events/{sports_id}
     const handleDelete = () => {
         const data = { id: team[0]["id"] };
@@ -29,8 +30,11 @@ const ListTeam = ({ sport_id, team }) => {
             .then((res) => {
                 setIsLoading(false);
                 window.location.reload(false)
+                // navigate('/')
             }).catch((error) => {
-                setIsLoading(false);
+                // window.location.reload();
+                navigate('/profile');
+                console.log('Hi');
             })
     };
     return (
@@ -44,9 +48,9 @@ const ListTeam = ({ sport_id, team }) => {
                 mt={4}
             >
                 {players.map((player, index) => (
-                    <Box key={index} p={4} borderWidth="1px" borderRadius="none" borderColor="black">
+                    <Box key={index} p={4} borderWidth="1px" borderRadius="none" borderColor="white"bgColor={'blackAlpha.300'}>
                         <Heading size="md">{player.first_name}</Heading>
-                        <Box as="span" color="gray.600">
+                        <Box as="span" color="white" >
                             {player.rollNum}
                         </Box>
                     </Box>
@@ -69,7 +73,7 @@ const ListTeam = ({ sport_id, team }) => {
             </Button>
             <AlertDialog isOpen={isOpen} leastDestructiveRef={cancelRef} onClose={onClose}>
                 <AlertDialogOverlay >
-                    <AlertDialogContent rounded="none" border="2px" borderColor={"black"}>
+                    <AlertDialogContent rounded="none" border="2px" borderColor={"black"} color={'black'}>
                         <AlertDialogHeader fontSize="lg" fontWeight="bold">
                             Delete Team
                         </AlertDialogHeader>

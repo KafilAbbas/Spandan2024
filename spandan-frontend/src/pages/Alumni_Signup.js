@@ -19,17 +19,23 @@ import {
     RadioGroup,
     ColorModeScript,
     Center,
+    useMediaQuery
 } from '@chakra-ui/react';
 import { ViewIcon, ViewOffIcon } from '@chakra-ui/icons';
 import { motion } from 'framer-motion';
 import { Link as ReactRouterLink } from 'react-router-dom';
 import Container from '../components/Container';
 import { useState } from 'react';
+import { MdArrowBack } from 'react-icons/md';
 // import axios from 'axios';
 
 const Alumni_Signup = () => {
     const [showPassword, setShowPassword] = useState(false);
-    const [isSubmitting, setSubmitting] = useState(false)
+    const [isSubmitting, setSubmitting] = useState(false);
+    const [isMobile] = useMediaQuery("(max-width: 768px)");
+    const handleRefresh = () => {
+        window.location.reload();
+    };
     const validateEmail = (value) => {
         let error;
         if (!value) {
@@ -77,6 +83,34 @@ const Alumni_Signup = () => {
         return error;
     };
 
+    const handleGetOtp = async (values, actions) => {
+        // Perform any pre-submission actions if needed
+
+        try {
+            console.log(values.email);
+            // Make the API request to get OTP
+            const response = await axios.post('/user/create/', {
+                // Provide any necessary data from the form values
+                email: values.email,
+                // email: values.email,
+                // other data...
+            });
+
+            // Handle the response from the backend
+            console.log('OTP request successful:', response.data);
+
+            // Perform any actions needed after successful OTP request
+
+        } catch (error) {
+            console.error('Error getting OTP:', error);
+
+            // Handle errors or update the form state accordingly
+        }
+
+        // Set submitting to false after the API request is complete
+        // actions.setSubmitting(false);
+    };
+
     const handleSubmit = async (values, actions) => {
 
         // set the values 
@@ -109,6 +143,7 @@ const Alumni_Signup = () => {
             first_name: "Amar",
             password: values.password,
             rollNum : values.rollNumber
+            
         }
 
         axios
@@ -155,16 +190,30 @@ const Alumni_Signup = () => {
             >
                 {({ values, errors, touched }) => (
                     <Form>
-                        <Flex align={'center'} justify={'center'} bg={'white'}>
+                        <Flex align={'center'} justify={'center'} bg={'none'}>
                             <Stack spacing={8} mx={'auto'} minW={'40vw'} py={12} px={6}>
-                                <Stack align={'center'}>
+                            { isMobile?
+                                <>
+                                    <Stack align={'center'} direction="row" spacing={5}>
+                                       
+                                    <Button colorScheme="white" bgColor='black' fontStyle='akshar' variant="outline" size="sm" onClick={handleRefresh}>
+                                        <MdArrowBack/>
+                                    </Button>
+                                        <Heading fontSize="4xl" textAlign="center">
+                                            Sign up as Alumini
+                                        </Heading>
+                                    </Stack>
+                                </>
+                                :
+                                <Stack align={'center'} >
                                     <Heading fontSize={'4xl'} textAlign={'center'}>
-                                        Sign up as Alumni
+                                        Sign up as Alumini
                                     </Heading>
                                 </Stack>
+                                }
                                 <Box
                                     rounded={'none'}
-                                    bg={"white"}
+                                    bg={"black"}
                                     p={8}
                                     border={"2px"}
                                 >
@@ -174,7 +223,7 @@ const Alumni_Signup = () => {
                                                 {({ field }) => (
                                                     <FormControl id="name" isRequired >
                                                         <FormLabel>Name</FormLabel>
-                                                        <Input type="text" {...field} border={"1px"} rounded="none" />
+                                                        <Input type="text" {...field} border={"1px"} rounded="none" bgColor={'whiteAlpha.500'}/>
                                                     </FormControl>
                                                 )}
                                             </Field>
@@ -189,6 +238,7 @@ const Alumni_Signup = () => {
                                                             value={field.value}
                                                             border="1px"
                                                             rounded="none"
+                                                            bgColor={'whiteAlpha.500'}
                                                         />
                                                     </FormControl>
                                                 )}
@@ -199,7 +249,7 @@ const Alumni_Signup = () => {
                                         {({ field, form }) => (
                                             <FormControl id="college_email" isInvalid={form.errors.college_email && form.touched.college_email} isRequired>
                                                 <FormLabel>College Email address</FormLabel>
-                                                <Input type="email" {...field} border={"1px"} rounded="none" />
+                                                <Input type="email" {...field} border={"1px"} rounded="none" bgColor={'whiteAlpha.500'}/>
                                                 {form.errors.college_email && form.touched.college_email && (
                                                     <FormErrorMessage>{form.errors.college_email}</FormErrorMessage>
                                                 )}
@@ -210,7 +260,7 @@ const Alumni_Signup = () => {
                                             {({ field, form }) => (
                                                 <FormControl id="regular_email" isInvalid={form.errors.email && form.touched.email} isRequired>
                                                     <FormLabel>Email address</FormLabel>
-                                                    <Input type="email" {...field} border={"1px"} rounded="none" />
+                                                    <Input type="email" {...field} border={"1px"} rounded="none" bgColor={'whiteAlpha.500'}/>
                                                     {form.errors.email && form.touched.email && (
                                                         <FormErrorMessage>{form.errors.email}</FormErrorMessage>
                                                     )}
@@ -226,6 +276,7 @@ const Alumni_Signup = () => {
                                                             type={showPassword ? 'text' : 'password'}
                                                             {...field}
                                                             border={"1px"}
+                                                            bgColor={'whiteAlpha.500'}
                                                         />
                                                         <InputRightElement h={'full'}>
                                                             <Button
@@ -251,6 +302,7 @@ const Alumni_Signup = () => {
                                                             type={showPassword ? 'text' : 'password'}
                                                             {...field}
                                                             border={"1px"}
+                                                            bgColor={'whiteAlpha.500'}
                                                         />
                                                         <InputRightElement h={'full'}>
                                                             <Button
@@ -285,7 +337,7 @@ const Alumni_Signup = () => {
                                                 {({ field, form }) => (
                                                     <FormControl id="phoneNumber" isInvalid={form.errors.phoneNumber && form.touched.phoneNumber}>
                                                         <FormLabel>Phone Number</FormLabel>
-                                                        <Input type="phoneNumber" {...field} border={"1px"} rounded="none" />
+                                                        <Input type="phoneNumber" {...field} border={"1px"} rounded="none" bgColor={'whiteAlpha.500'}/>
                                                         {form.errors.phoneNumber && form.touched.phoneNumber && (
                                                             <FormErrorMessage>{form.errors.phoneNumber}</FormErrorMessage>
                                                         )}
@@ -297,8 +349,8 @@ const Alumni_Signup = () => {
                                         <HStack spacing={10} pt={2} alignSelf={'center'}> 
                                             <Button
                                                 variant={"custom"}
-                                                bg={'yellow.300'}
-                                                color={'black'}
+                                                bg={'red'}
+                                                color={'white'}
                                                 _hover={{
                                                     bg: 'yellow.400',
                                                 }}
@@ -315,7 +367,7 @@ const Alumni_Signup = () => {
                                             <Field name="Otp" justifyContent={'center'}>
                                                 {({ field, form }) => (
                                                     <FormControl id="Otp" isInvalid={form.errors.Otp && form.touched.Otp}>
-                                                    <Input type="text" {...field} border={"2px"} rounded="none" py={4} width={'30'}/>
+                                                    <Input type="text" {...field} border={"2px"} rounded="none" py={4} width={'30'} bgColor={'whiteAlpha.500'}/>
                                                     {form.errors.Otp && form.touched.Otp && (
                                                         <FormErrorMessage>{form.errors.Otp}</FormErrorMessage>
                                                     )}
@@ -328,8 +380,8 @@ const Alumni_Signup = () => {
                                         <Stack spacing={10} pt={4}>
                                             <Button
                                                 variant={"custom"}
-                                                bg={'yellow.300'}
-                                                color={'black'}
+                                                bg={'red'}
+                                                color={'white'}
                                                 _hover={{
                                                     bg: 'yellow.400',
                                                 }}
@@ -344,7 +396,7 @@ const Alumni_Signup = () => {
                                         </Stack>
                                         <Stack pt={2}>
                                             <Text align={'center'}>
-                                                Already a user? <Link color={'blue'} as={ReactRouterLink} to={'/login'}>Login</Link>
+                                                Already a user? <Link color={'#DC35AA'} as={ReactRouterLink} to={'/login'}>Login</Link>
                                             </Text>
                                         </Stack>
                                     </Stack>

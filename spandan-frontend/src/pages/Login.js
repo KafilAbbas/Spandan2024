@@ -83,11 +83,11 @@ export default function Login() {
                             Sign in using your IIITB account
                         </Heading>
 
-                        <Text color="red" fontWeight={"bold"} fontSize={"30"}>
+                        {/* <Text color="red" fontWeight={"bold"} fontSize={"30"}>
                             IMPORTANT: CLICK ON FORGOT PASSWORD IF YOU ARE LOGGING IN FOR THE FIRST TIME
-                        </Text>
+                        </Text> */}
                     </Stack>
-                    <Box bg={useColorModeValue('white', 'gray.700')} border="2px" p={8}>
+                    <Box bg={useColorModeValue('black', 'gray.700')} border="2px" p={8}>
                         <Formik initialValues={{ email: '', password: '', rememberMe: true }} onSubmit={handleSubmit}>
                             {({ isSubmitting }) => (
                                 <Form>
@@ -132,10 +132,10 @@ export default function Login() {
                                             <Button
                                                 type="submit"
                                                 variant="custom"
-                                                bg={'yellow.300'}
-                                                color={'black'}
+                                                bg={'red'}
+                                                color={'white'}
                                                 _hover={{
-                                                    bg: 'yellow.400',
+                                                    bg: 'black',
                                                 }}
                                                 alignItems="center"
                                                 as={motion.button}

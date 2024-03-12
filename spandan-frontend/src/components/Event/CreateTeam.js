@@ -150,6 +150,7 @@ const CreateTeam = ({ sport_id }) => {
                     console.log("User not authorized to access this endpoint");
                 } else {
                     console.log("Error occurred:", error);
+                    navigate('/profile');
                 }
                 setError(true);
                 setcaughtError(error.response.data.error);
@@ -181,7 +182,7 @@ const CreateTeam = ({ sport_id }) => {
                                 isInvalid={errors.teamName && touched.teamName}
                                 mt={4}
                             >
-                                <FormLabel>Team Name</FormLabel>
+                                <FormLabel fontFamily={'akshar'} fontSize={20}>Team Name</FormLabel>
                                 <Input
                                     type="text"
                                     name="teamName"
@@ -189,6 +190,7 @@ const CreateTeam = ({ sport_id }) => {
                                     onChange={(e) => setFieldValue('teamName', e.target.value)}
                                     rounded="none"
                                     placeholder="Enter your team name here"
+                                    _placeholder={{fontFamily:'akshar',color:'white',fontSize:'1.5rem'}}
                                 />
                                 <FormErrorMessage>{errors.teamName}</FormErrorMessage>
                             </FormControl>
@@ -198,7 +200,7 @@ const CreateTeam = ({ sport_id }) => {
                                 isInvalid={errors.captainMobNo && touched.captainMobNo}
                                 mt={4}
                             >
-                                <FormLabel>Captain's Mobile Number</FormLabel>
+                                <FormLabel fontFamily={'akshar'} fontSize={20}>Captain's Mobile Number</FormLabel>
                                 <Input
                                     type="text"
                                     name="captainMobNo"
@@ -206,13 +208,14 @@ const CreateTeam = ({ sport_id }) => {
                                     onChange={(e) => setFieldValue('captainMobNo', e.target.value)}
                                     rounded="none"
                                     placeholder="9998777654"
+                                    _placeholder={{fontFamily:'akshar',color:'white',fontSize:'1.5rem'}}
                                 />
                                 <FormErrorMessage>{errors.captainMobNo}</FormErrorMessage>
                             </FormControl>
                         </Grid>
 
                         <FormControl mt={4}>
-                            <FormLabel>Search for your teammates</FormLabel>
+                            <FormLabel fontFamily={'akshar'} fontSize={20}>Search for your teammates</FormLabel>
                             <InputGroup>
                                 <InputLeftElement
                                     pointerEvents='none'
@@ -224,6 +227,7 @@ const CreateTeam = ({ sport_id }) => {
                                     placeholder="Search by name or roll number"
                                     onChange={(e) => { handleSearchChange(e) }}
                                     rounded="none"
+                                    _placeholder={{fontFamily:'akshar',color:'white',fontSize:'1.5rem'}}
                                 />
                             </InputGroup>
                             <Box overflowY="auto">
@@ -237,7 +241,7 @@ const CreateTeam = ({ sport_id }) => {
                                                     p={2}
                                                     position="relative"
                                                     cursor="pointer"
-                                                    _hover={{ bg: "gray.100" }}
+                                                    _hover={{ bg: "white" ,color:'black'}}
                                                     onClick={() => {
                                                         setFieldValue('players', [
                                                             ...values.players,
@@ -279,7 +283,7 @@ const CreateTeam = ({ sport_id }) => {
 
                         <Button
                             type="submit"
-                            colorScheme="blue"
+                            colorScheme="pink"
                             mt={4}
                             mb={8}
                             rounded="none"
@@ -288,6 +292,8 @@ const CreateTeam = ({ sport_id }) => {
                                 Object.keys(errors).length > 0 ||
                                 values.players.length === 0
                             }
+                            fontSize={'xl'}
+                            size={'xl'}
                         >
                             Register
                         </Button>

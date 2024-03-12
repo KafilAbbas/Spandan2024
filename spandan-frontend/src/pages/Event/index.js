@@ -77,11 +77,11 @@ const Event = () => {
                                 <Heading as="h2" size="lg" p={1}>Rules</Heading>
                                 {/* <ChakraLink href={`${process.env.PUBLIC_URL}${sport.rulesURL}`} isExternal> */}
                                 <ChakraLink href={`${sport.rulesURL}`} isExternal>
-                                    <ExternalLinkIcon color='black' _hover={{ color: "blue" }} />
+                                    <ExternalLinkIcon color='black' _hover={{ color: "pink" }} />
                                 </ChakraLink>
                             </HStack>
                             <Box maxHeight={{ base: "80vh", md: "50vh" }} overflowY="auto" border={"1px"}>
-                                <Text whiteSpace="pre-wrap" fontSize={{ base: "sm", md: "normal" }} p={2} m={2}>
+                                <Text whiteSpace="pre-wrap" fontSize={{ base: "sm", md: "normal" }} p={2}  bgColor={'black'}>
                                     {rules}
                                 </Text>
                             </Box>
@@ -104,9 +104,9 @@ const Event = () => {
                                         <Heading fontSize={'3xl'}>
                                             Login to create team
                                         </Heading>
-                                        <Text
+                                        <Text align={'center'}
                                             fontSize={{ base: 'sm', sm: 'md' }}
-                                            color={'gray.800'}>
+                                            color={'white'}>
                                             Looks like you havent logged in yet
                                         </Text>
 
@@ -114,10 +114,10 @@ const Event = () => {
                                             <Link to="/login">
                                                 <Button
                                                     variant={"custom"}
-                                                    bg={'yellow.300'}
+                                                    bg={'red'}
                                                     color={'black'}
                                                     _hover={{
-                                                        bg: 'yellow.400',
+                                                        bg: 'red.800',
                                                     }}
                                                     alignItems="center"
                                                     type="submit"
