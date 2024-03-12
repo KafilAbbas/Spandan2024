@@ -20,53 +20,72 @@ class TeamForm(forms.ModelForm):
         #     }
         # }
     def clean(self):
-            print("in clean")
-        # try:
-            members = self.cleaned_data.get('members')
-            sport = self.cleaned_data.get('sport')
-            team_size = self.cleaned_data.get('team_size')
-            genders =[]
-            if len(members)!=team_size:
-                retst = "Given team size and members count donnt match "
-                raise ValidationError(retst)
-            print(members)
-            for member in members:
+        print("in clean")
+        members = self.cleaned_data.get('members')
+        sport = self.cleaned_data.get('sport')
+        team_size = self.cleaned_data.get('team_size')
+        genders = []
 
-                    genders.append(member.gender)
-                    # print(genders)
-                # try:
-                    userr = NewUser.objects.get(id=member.id)
-                    tteams = userr.teams.all()
-                    # print(tteams)
-                    MajorCat = set()
-                    inSportsNames = []
-                    for tt in tteams:
-                        if tt.sport.category != "NonMajor":
-                            MajorCat.add(tt.sport.category)
-                        inSportsNames.append(tt.sport.name)
-                    print("hii")
+        if len(members) != team_size:
+            retst = "Given team size and members count don't match"
+            raise ValidationError(retst)
 
-                    if sport.category!="NonMajor" and sport.category not in MajorCat and len( MajorCat)>=4:
-                        retst = "Given team member:"+ str(member.user_name)  +" is already in 4 teams "
-                        print(retst)
-                        raise forms.ValidationError(retst)
-                    print(sport.name,inSportsNames)
+        print(members)
+        for member in members:
+            genders.append(member.gender)
 
-                    if sport.name in inSportsNames:
-                        retst = "Given team member:"+ str(member.user_name) +" is already registered for this sport "
-                        print(retst)
+            userr = NewUser.objects.get(id=member.id)
+            tteams = userr.teams.all()
 
-                        raise forms.ValidationError(retst)
-                # except Exception as e:
-                #     print(str(e))
-                #     est = "error occured for {userr.name}:"+str(e)
-                #     return Response(data={'error': est},status=status.HTTP_400_BAD_REQUEST)
+            MajorCat = set()
+            MinorCat = set()
+            inSportsNames = []
 
-            count_m = 0
-            print("skip1")
-            for g in genders:
-                if g == 'm':
-                    count_m+=1
+            for tt in tteams:
+                if tt.sport.category != "NonMajor":
+                    MajorCat.add(tt.sport.category)
+                else:
+                    MinorCat.add(tt.sport.name)
+                inSportsNames.append(tt.sport.name)
+            print("hii")
+
+            for tt in tteams:
+                inSportsNames.append(tt.sport.name)
+            print("HIIII")
+
+            if sport.category != "NonMajor" and sport.category not in MajorCat and len(MajorCat) >= 4:
+                retst = "Given team member:" + str(member.user_name) + " is already in 4 teams "
+                print(retst)
+                raise forms.ValidationError(retst)
+
+            print(sport.name, inSportsNames)
+
+            if sport.category == "NonMajor":
+                # Adjust NonMajor sports count based on 'Fifa-S' and 'Fifa-D'
+                if ('Fifa-S' in MinorCat and sport.name == 'Fifa-D') or ('Fifa-D' in MinorCat and sport.name == 'Fifa-S'):
+                    max_non_major = 6  # Maximum 5 sports including 'Fifa-S' or 'Fifa-D'
+                else:
+                    max_non_major = 5  # Maximum 6 sports if both 'Fifa-S' and 'Fifa-D' are present
+
+                if len(MinorCat) >= max_non_major:
+                    retst = f"Given team member: {member.user_name} is already in {max_non_major} non-major sports"
+                    print(retst)
+                    raise forms.ValidationError(retst)
+
+            print(sport.name, inSportsNames)
+            print(MinorCat)
+
+            if sport.name in inSportsNames:
+                retst = "Given team member:" + str(member.user_name) + " is already registered for this sport "
+                print(retst)
+                raise forms.ValidationError(retst)
+
+        count_m = 0
+        print("skip1")
+        for g in genders:
+            if g == 'm':
+                count_m += 1
+
 
             # if count_m < sport.min_males or (team_size - count_m)<sport.min_females:
             #     retst = "Given team needs to have min males:"+ str(sport.min_males)+", min females:"+str(sport.min_males)

@@ -6,6 +6,7 @@ import Signup from '../Signup';
 import Staff_Signup from '../Staff_Signup';
 import Alumni_Signup from '../Alumni_Signup';
 import { MdArrowBack } from 'react-icons/md';
+import SEOComponent from '../../components/SEO';
 const Main = () => {
   const [selectedButton, setSelectedButton] = useState(null);
   const [isMobile] = useMediaQuery("(max-width: 768px)");
@@ -17,7 +18,8 @@ const Main = () => {
     navigate('/');
   };
 
-  return (
+  return (<>
+    <SEOComponent page_name={'Sign Up'} />
     <div style={{ height: '100vh', width: '100vw' }}>
       <Grid
         h={isMobile && selectedButton ? '100%' : '100vh'} // Set height dynamically based on isMobile state and selected button
@@ -36,8 +38,8 @@ const Main = () => {
               <Button colorScheme="white" bgColor='black' fontStyle='akshar' variant="outline" size="xl" onClick={handleRefresh}>
                 <MdArrowBack/>
               </Button>
-              <Button h='10vh' colorScheme='white' bgColor={'black'} variant='outline' width='300px' fontSize={40} onClick={() => handleButtonClick("Alumini")} borderRadius={0}>
-                Alumini
+              <Button h='10vh' colorScheme='white' bgColor={'black'} variant='outline' width='300px' fontSize={40} onClick={() => handleButtonClick("Alumni")} borderRadius={0}>
+                Alumni
               </Button>
 
               <Button h='10vh' colorScheme='white' bgColor={'black'} variant='outline' width='300px' fontSize={40} onClick={() => handleButtonClick("Student")}borderRadius={0}>
@@ -72,14 +74,14 @@ const Main = () => {
           >
             {selectedButton ? (
               <>
-                {selectedButton === "Alumini" && <Alumni_Signup />}
+                {selectedButton === "Alumni" && <Alumni_Signup />}
                 {selectedButton === "Student" && <Signup />}
                 {/* {selectedButton === "Staff" && <Staff_Signup />} */}
               </>
             ) : null}
           </GridItem>
         )}
-        {isMobile && selectedButton === "Alumini" && (
+        {isMobile && selectedButton === "Alumni" && (
           <GridItem
             rowSpan={1}
             colSpan={5}
@@ -114,6 +116,7 @@ const Main = () => {
         )} */}
       </Grid>
     </div>
+    </>
   )
 }
 

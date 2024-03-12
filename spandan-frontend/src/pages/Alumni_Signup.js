@@ -200,14 +200,14 @@ const Alumni_Signup = () => {
                                         <MdArrowBack/>
                                     </Button>
                                         <Heading fontSize="4xl" textAlign="center">
-                                            Sign up as Alumini
+                                            Sign up as alumni
                                         </Heading>
                                     </Stack>
                                 </>
                                 :
                                 <Stack align={'center'} >
                                     <Heading fontSize={'4xl'} textAlign={'center'}>
-                                        Sign up as Alumini
+                                        Sign up as alumni
                                     </Heading>
                                 </Stack>
                                 }
