@@ -1,21 +1,30 @@
-// theme.ts (tsx file with usage of StyleFunctions, see 4.)
 import { extendTheme } from '@chakra-ui/react'
 import "@fontsource/vt323";
+// import '@fontsource/open-sans'
+import '@fontsource/akshar'
+import '@fontsource/archivo'
+// import '@fontsource/bakbak-one'
 
 const fonts = {
-    heading: 'vt323, monospace',
-    body: 'vt323, monospace',
-    mono: `vt323, monospace`,
+    heading: 'archivo',
+    body: 'akshar',
+    mono: 'akshar',
 };
 
 const theme = extendTheme({
     fonts,
     fontWeights: {
-        normal: 400,
-        bold: 700,
+        normal: 600,
+        bold: 1000,
     },
     styles: {
         global: {
+            body: {
+                backgroundImage: "url('/DarkPink.png')", // Corrected here
+                backgroundSize: "cover",
+                backgroundPosition: "center",
+                color:'white'
+            },
             h1: {
                 fontWeight: "bold",
                 fontSize: "2.5rem",
@@ -53,15 +62,14 @@ const theme = extendTheme({
             mb: '4',
             borderRadius: '0',
             borderWidth: '4px',
-            borderColor: 'black',
-            bgColor: 'white',
+            borderColor: 'white',
+            bgColor: 'black',
         }
     },
     components: {
         Button: {
-            // 1. We can update the base styles
             baseStyle: {
-                fontWeight: 'semibold', // Normally, it is "semibold"
+                fontWeight: 'normal',
             },
             sizes: {
                 xl: {
@@ -70,22 +78,18 @@ const theme = extendTheme({
                     px: '32px',
                 },
             },
-            // 3. We can add a new visual variant
             variants: {
                 'with-shadow': {
                     bg: 'red.400',
                     boxShadow: '0 0 2px 2px #efdfde',
                 },
-                // 4. We can override existing variants
                 solid: (props) => ({
                     bg: props.colorMode === 'dark' ? 'red.300' : 'red.500',
                 }),
-                // 5. We can add responsive variants
                 sm: {
                     bg: 'teal.500',
                     fontSize: 'md',
                 },
-
                 'custom': {
                     bg: "white",
                     color: "black",
@@ -94,19 +98,17 @@ const theme = extendTheme({
                         boxShadow: "4px 4px 0px rgba(0, 0, 0, 1)",
                     },
                     borderWidth: "2px",
-                    borderColor: "black",
+                    borderColor: "white",
                     borderRadius: "none"
                 },
-
             },
-            // 6. We can overwrite defaultProps
             defaultProps: {
-                size: 'md', // default is md
-                variant: 'solid', // default is solid
-                colorScheme: 'gray', // default is gray
+                size: 'md',
+                variant: 'solid',
+                colorScheme: 'gray',
             },
         },
     },
 })
 
-export default theme
+export default theme;

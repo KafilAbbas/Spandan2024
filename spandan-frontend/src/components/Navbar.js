@@ -36,7 +36,7 @@ const Logo = () => {
         <Stack align={"center"} justify={"space-around"} w={{ base: "70vw", md: "280px" }} h='inherit' borderRight={'inherit'}>
             < Link href="/" _hover={{ textDecoration: "none" }} >
                 <Text
-                    fontFamily="heading"
+                    fontFamily="akshar"
                     fontSize={{ base: "5vh", lg: "5vh" }}
                     fontWeight="bold"
                     letterSpacing="widest"
@@ -77,13 +77,13 @@ const ProfileBlock = () => {
         user && <Link _hover={{ textDecoration: "none" }} as={ReactRouterLink} to="/profile">
             <Button
                 variant="custom"
-                bg="blue.100"
+                bg="purple.100"
                 display="flex"
                 alignItems="center"
                 onClick={toggleDropdown}
                 as={motion.button}
                 whileTap={{ scale: 0.9 }}
-                _hover={{ bg: "blue.200", boxShadow: "4px 4px 0px rgba(0, 0, 0, 1)", }}
+                _hover={{ bg: "#DC35AA", boxShadow: "4px 4px 0px rgba(0, 0, 0, 1)", }}
                 w="full"
             >
                 <Blockies seed="Random Name" scale={3} color="blue" bgColor="red" spotColor="blue" className="identicon" />
@@ -103,11 +103,11 @@ function NavItem(props) {
                 paddingY={large ? '5' : '2.5'}
                 spacing={{ base: "2", md: "3" }}
                 aria-current={active ? 'page' : undefined}
-                _hover={{ color: "blue" }}
+                _hover={{ color: "#DC35AA" }}
 
             >
                 <Icon as={icon} />
-                <Text fontFamily="heading" fontWeight="medium" fontSize={{ base: "20px", md: "25px" }}>{children}</Text>
+                <Text fontFamily="heading" fontWeight="medium" fontSize={{ base: "20px", md: "35px" }}>{children}</Text>
             </HStack>
         </Link >
     );
@@ -121,7 +121,7 @@ function DesktopNavItemGroup(props) {
     };
 
     return (
-        <HStack as="nav" aria-label="Main navigation" justify="space-around" spacing="8" {...props}>
+        <HStack as="nav" aria-label="Main navigation" justify="space-around" spacing="8" fontSize={25}{...props}>
             {items.map((item, index) => (
                 <NavItem
                     key={item.label}
@@ -139,13 +139,14 @@ function DesktopNavItemGroup(props) {
                 <ButtonGroup gap={{ base: '4', md: '4' }}>
                     <Link _hover={{ textDecoration: "none" }} as={ReactRouterLink} to="/login">
                         <Button
-                            variant="custom"
+                            variant="link"
                             as={motion.button}
                             whileTap={{ scale: 0.9 }}
-                            color={"gray.800"}
+                            color={"white"}
                             fontFamily="heading"
-                            fontSize={"25"}
+                            fontSize={"35"}
                             fontWeight={'medium'}
+                            _hover={{color:"#DC35AA"}}
                         >
                             Login
                         </Button>
@@ -191,14 +192,15 @@ function MobileNavItemGroup(props) {
                 <>
                     <Link _hover={{ textDecoration: "none" }} as={ReactRouterLink} to="/login">
                         <Button
-                            variant="custom"
+                            variant="link"
                             as={motion.button}
                             whileTap={{ scale: 0.9 }}
-                            color={"gray.800"}
+                            color={"white"}
                             fontFamily="heading"
                             fontSize={"25"}
                             fontWeight={'medium'}
                             w='full'
+                            _hover={{color:"#DC35AA"}}
                         >
                             Login
                         </Button>
@@ -250,7 +252,7 @@ function MobileNavMenu(props) {
             </Center>
             <Drawer isOpen={menu.isOpen} onClose={menu.onClose} placement="bottom">
                 <DrawerOverlay />
-                <DrawerContent id="nav-menu" border={'black'} bg="white" padding="6">
+                <DrawerContent id="nav-menu" border={'black'} bg="black" padding="6">
                     <MobileNavItemGroup isAuthenticated={props.isAuthenticated} />
                 </DrawerContent>
             </Drawer>

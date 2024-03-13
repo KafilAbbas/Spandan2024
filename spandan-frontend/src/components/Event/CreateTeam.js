@@ -10,7 +10,7 @@ import {
     Grid,
     Heading,
     Input,
-    InputLeftElement,
+    InputRightElement,
     Radio,
     RadioGroup,
     Stack,
@@ -19,7 +19,8 @@ import {
     Text,
     Flex,
     Spacer,
-    InputGroup
+    InputGroup,
+    // SearchResult
 } from '@chakra-ui/react';
 import { useState, useEffect } from 'react';
 import { Formik, Form, FieldArray, Field } from 'formik';
@@ -29,6 +30,19 @@ import { SearchIcon } from '@chakra-ui/icons';
 import { Navigate, useNavigate } from 'react-router-dom';
 
 const users = IIITBStudentData;
+
+const SearchResult = ({ userDetails }) => {
+    if (!userDetails) return null;
+
+    return (
+        <Box mt={4} p={4} borderWidth="1px" borderRadius="md">
+            <p>User Details:</p>
+            <p>Name: {userDetails.user_name}</p>
+            <p>Roll Number: {userDetails.rollNum}</p>
+            {/* Add more details as needed */}
+        </Box>
+    );
+};
 
 // console.log(users[0]);
 
@@ -41,11 +55,39 @@ const CreateTeam = ({ sport_id }) => {
     const [filteredUsers, setFilteredUsers] = useState([]);
     const [caughtError, setcaughtError] = useState();
     const [error, setError] = useState(false)
+    const [searchQuery, setSearchQuery] = useState('');
+  const [searchResults, setSearchResults] = useState([]);
+  const [rollNum, setRollNum] = useState(''); // State variable for roll number
+  const [userDetails, setUserDetails] = useState(null);
+  const handleSearch = async () => {
+    try {
+        const response = await axios.get(`/user/getuserbyroll/?rollNum=${rollNum}`);
+        console.log(response.data);
+        setSearchResults([response.data]); // Update search results with the found user
+    } catch (error) {
+        console.error('Error searching users:', error);
+    }
+};
 
+  const handleRollNumChange = (e) => {
+      setRollNum(e.target.value); // Update roll number state
+  };
     const handleSearchChange = (event) => {
-        setSearch(event.target.value);
+        setSearchQuery(event.target.value);
     };
 
+    // const handleSearch = async () => {
+    //     try {
+    //         const response = await axios.post(`/user/getuserbyrollnum/?rollNum=${rollNum}`, { search_query: searchQuery });
+    //         console.log(response.data);
+    //     } catch (error) {
+    //         console.error('Error searching users:', error);
+    //     }
+    // };
+
+    useEffect(() => {
+        handleSearch();
+    }, [searchQuery]);
     useEffect(() => {
         // Filter users based on search query
         const filtered = users.filter(user =>
@@ -85,8 +127,8 @@ const CreateTeam = ({ sport_id }) => {
                     <Box key={index} p={4} borderWidth="1px" borderRadius="none">
                         <Flex direction={"row"}>
                             <Stack>
-                                <Heading size="md">{player.name}</Heading>
-                                <Box as="span" color="gray.600">
+                                <Heading size="md">{player.user_name}</Heading>
+                                <Box color="white.600">
                                     {player.rollNum}
                                 </Box>
                                 <Box mt={4}>
@@ -150,6 +192,7 @@ const CreateTeam = ({ sport_id }) => {
                     console.log("User not authorized to access this endpoint");
                 } else {
                     console.log("Error occurred:", error);
+                    navigate('/profile');
                 }
                 setError(true);
                 setcaughtError(error.response.data.error);
@@ -181,7 +224,7 @@ const CreateTeam = ({ sport_id }) => {
                                 isInvalid={errors.teamName && touched.teamName}
                                 mt={4}
                             >
-                                <FormLabel>Team Name</FormLabel>
+                                <FormLabel fontFamily={'akshar'} fontSize={20}>Team Name</FormLabel>
                                 <Input
                                     type="text"
                                     name="teamName"
@@ -189,6 +232,7 @@ const CreateTeam = ({ sport_id }) => {
                                     onChange={(e) => setFieldValue('teamName', e.target.value)}
                                     rounded="none"
                                     placeholder="Enter your team name here"
+                                    _placeholder={{fontFamily:'akshar',color:'white',fontSize:'1.5rem'}}
                                 />
                                 <FormErrorMessage>{errors.teamName}</FormErrorMessage>
                             </FormControl>
@@ -198,7 +242,7 @@ const CreateTeam = ({ sport_id }) => {
                                 isInvalid={errors.captainMobNo && touched.captainMobNo}
                                 mt={4}
                             >
-                                <FormLabel>Captain's Mobile Number</FormLabel>
+                                <FormLabel fontFamily={'akshar'} fontSize={20}>Captain's Mobile Number</FormLabel>
                                 <Input
                                     type="text"
                                     name="captainMobNo"
@@ -206,30 +250,39 @@ const CreateTeam = ({ sport_id }) => {
                                     onChange={(e) => setFieldValue('captainMobNo', e.target.value)}
                                     rounded="none"
                                     placeholder="9998777654"
+                                    _placeholder={{fontFamily:'akshar',color:'white',fontSize:'1.5rem'}}
                                 />
                                 <FormErrorMessage>{errors.captainMobNo}</FormErrorMessage>
                             </FormControl>
                         </Grid>
 
                         <FormControl mt={4}>
-                            <FormLabel>Search for your teammates</FormLabel>
+                            <FormLabel fontFamily={'akshar'} fontSize={20}>Search for your teammates using Roll Number (e.g. IMT2022xxx)</FormLabel>
                             <InputGroup>
-                                <InputLeftElement
-                                    pointerEvents='none'
-                                    children={<SearchIcon color='gray.300' />}
-                                />
-                                <Input
-                                    type="text"
-                                    name="search"
-                                    placeholder="Search by name or roll number"
-                                    onChange={(e) => { handleSearchChange(e) }}
-                                    rounded="none"
-                                />
-                            </InputGroup>
-                            <Box overflowY="auto">
-                                {search.length > 2 && filteredUsers.length > 0 && (
+            <Input
+                type="search"
+                name="search"
+                placeholder="Search by roll number"
+                value={rollNum} // Bind rollNum state variable to the value of the input
+                onChange={handleRollNumChange} // Call handleRollNumChange on input change
+                rounded="none"
+                _placeholder={{ fontFamily: 'akshar', color: 'white', fontSize: '1.5rem' }}
+            />
+            <Button onClick={handleSearch}>
+                <InputRightElement pointerEvents='none'>
+                    <SearchIcon color='gray.300' />
+                </InputRightElement>
+            </Button>
+        </InputGroup>
+        {/* <Box mt={4}>
+                    {searchResults.length > 0 && (
+                        <SearchResult userDetails={searchResults[0]} />
+                    )}
+        </Box> */}
+        <Box overflowY="auto">
+                                {searchResults.length >= 1 && (
                                     <List mt={4} border="1px" overflowY="scroll" maxH={"25vh"} pl={4} pr={4}>
-                                        {filteredUsers.filter(user =>
+                                        {searchResults.filter(user =>
                                             user.rollNum && !values.players.some(player => player.rollNum === user.rollNum)
                                         ).map((user) => (
                                             <ListItem key={user.rollNum}>
@@ -237,7 +290,7 @@ const CreateTeam = ({ sport_id }) => {
                                                     p={2}
                                                     position="relative"
                                                     cursor="pointer"
-                                                    _hover={{ bg: "gray.100" }}
+                                                    _hover={{ bg: "white" ,color:'black'}}
                                                     onClick={() => {
                                                         setFieldValue('players', [
                                                             ...values.players,
@@ -246,14 +299,13 @@ const CreateTeam = ({ sport_id }) => {
                                                         setSearch("")
                                                     }}
                                                 >
-                                                    <Text fontWeight="normal">{user.name} - {user.rollNum}</Text>
+                                                    <Text fontWeight="normal">{user.user_name} - {user.rollNum}</Text>
                                                 </Box>
                                             </ListItem>
                                         ))}
                                     </List>
                                 )}
                             </Box>
-
                         </FormControl>
 
                         <FieldArray
@@ -279,7 +331,7 @@ const CreateTeam = ({ sport_id }) => {
 
                         <Button
                             type="submit"
-                            colorScheme="blue"
+                            colorScheme="pink"
                             mt={4}
                             mb={8}
                             rounded="none"
@@ -288,6 +340,8 @@ const CreateTeam = ({ sport_id }) => {
                                 Object.keys(errors).length > 0 ||
                                 values.players.length === 0
                             }
+                            fontSize={'xl'}
+                            size={'xl'}
                         >
                             Register
                         </Button>

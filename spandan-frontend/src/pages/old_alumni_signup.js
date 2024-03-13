@@ -28,11 +28,10 @@ import Container from '../components/Container';
 import { useState } from 'react';
 import { MdArrowBack } from 'react-icons/md';
 // import axios from 'axios';
-// impot MdArrowBack
 
-const Signup = () => {
+const Alumni_Signup = () => {
     const [showPassword, setShowPassword] = useState(false);
-    const [isSubmitting, setSubmitting] = useState(false)
+    const [isSubmitting, setSubmitting] = useState(false);
     const [isMobile] = useMediaQuery("(max-width: 768px)");
     const handleRefresh = () => {
         window.location.reload();
@@ -41,6 +40,19 @@ const Signup = () => {
         let error;
         if (!value) {
             error = 'Email address is required';
+        }
+        else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(value)) {
+            error = 'Invalid email address';
+        }
+        else if (!value.endsWith('.com')) {
+            error = 'Email address must end with .com';
+        }
+        return error;
+    };
+    const validateCollegeEmail = (value) => {
+        let error;
+        if (!value) {
+            error = 'College Email address is required';
         }
         else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(value)) {
             error = 'Invalid email address';
@@ -71,7 +83,6 @@ const Signup = () => {
         return error;
     };
 
-
     const handleGetOtp = async (values, actions) => {
         // Perform any pre-submission actions if needed
 
@@ -99,7 +110,6 @@ const Signup = () => {
         // Set submitting to false after the API request is complete
         // actions.setSubmitting(false);
     };
-
 
     const handleSubmit = async (values, actions) => {
 
@@ -175,7 +185,6 @@ const Signup = () => {
                     sex: '',
                     rollNumber: '',
                     phoneNumber: '',
-                    otp: '',
                 }}
                 onSubmit={handleSubmit}
             >
@@ -191,14 +200,14 @@ const Signup = () => {
                                         <MdArrowBack/>
                                     </Button>
                                         <Heading fontSize="4xl" textAlign="center">
-                                            Sign up as Student
+                                            Sign up as alumni
                                         </Heading>
                                     </Stack>
                                 </>
                                 :
                                 <Stack align={'center'} >
                                     <Heading fontSize={'4xl'} textAlign={'center'}>
-                                        Sign up as Student
+                                        Sign up as alumni
                                     </Heading>
                                 </Stack>
                                 }
@@ -208,9 +217,9 @@ const Signup = () => {
                                     p={8}
                                     border={"2px"}
                                 >
-                                    <Stack spacing={4}>
+                                    <Stack spacing={2}>
                                         <HStack>
-                                            <Field name="name" >
+                                            <Field name="name">
                                                 {({ field }) => (
                                                     <FormControl id="name" isRequired >
                                                         <FormLabel>Name</FormLabel>
@@ -236,9 +245,20 @@ const Signup = () => {
                                             </Field>
 
                                         </HStack>
+                                        <Field name="college_email" validate={validateCollegeEmail}>
+                                        {({ field, form }) => (
+                                            <FormControl id="college_email" isInvalid={form.errors.college_email && form.touched.college_email} isRequired>
+                                                <FormLabel>College Email address</FormLabel>
+                                                <Input type="email" {...field} border={"1px"} rounded="none" bgColor={'whiteAlpha.500'}/>
+                                                {form.errors.college_email && form.touched.college_email && (
+                                                    <FormErrorMessage>{form.errors.college_email}</FormErrorMessage>
+                                                )}
+                                            </FormControl>
+                                        )}
+                                        </Field>
                                         <Field name="email" validate={validateEmail}>
                                             {({ field, form }) => (
-                                                <FormControl id="email" isInvalid={form.errors.email && form.touched.email} isRequired>
+                                                <FormControl id="regular_email" isInvalid={form.errors.email && form.touched.email} isRequired>
                                                     <FormLabel>Email address</FormLabel>
                                                     <Input type="email" {...field} border={"1px"} rounded="none" bgColor={'whiteAlpha.500'}/>
                                                     {form.errors.email && form.touched.email && (
@@ -358,8 +378,6 @@ const Signup = () => {
                                                     </FormControl>
                                                 )}
                                             </Field>
-
-
                                         </HStack>
                                         <Stack spacing={10} pt={4}>
                                             <Button
@@ -367,19 +385,13 @@ const Signup = () => {
                                                 bg={'red'}
                                                 color={'white'}
                                                 _hover={{
-                                                    bg: 'red',
+                                                    bg: 'yellow.400',
                                                 }}
                                                 alignItems="center"
                                                 type="submit"
                                                 as={motion.button}
                                                 whileTap={{ scale: 0.9 }}
                                                 isLoading={isSubmitting}
-                                                onClick={(e) => {
-                                                    // Prevent form submission
-                                                    e.preventDefault();
-                                                    // Call the function to handle Get OTP
-                                                    handleSubmit(values, {});
-                                                }}
                                             >
                                                 Sign up
                                             </Button>
@@ -399,4 +411,4 @@ const Signup = () => {
     );
 }
 
-export default Signup;
+export default Alumni_Signup;

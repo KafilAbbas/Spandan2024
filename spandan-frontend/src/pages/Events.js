@@ -20,8 +20,16 @@ function SearchBar({ onSearch }) {
     };
 
     return (
-        <Box p={4} borderColor={"black"}>
-            <Input placeholder="Search Sports" onChange={handleChange} />
+        <Box p={4}>
+            <Input placeholder="Search Sports" onChange={handleChange} border="2px solid white"
+  borderRadius="none"
+  backgroundColor={'blackAlpha.300'}
+  _placeholder={{
+    fontSize: "1.8rem", // Adjust the font size as needed
+    fontWeight: "600", // Make the placeholder text bold
+    fontStyle: "akshar",
+    color:'whiteAlpha.900' // Add italic font style
+  }}/>
         </Box>
     );
 }
@@ -47,11 +55,11 @@ function SportsCard({ title, data }) {
                     {data.map((sport) => (
                         <GridItem
                             key={sport.id}
-                            borderWidth="2px"
-                            borderRadius="0"
-                            borderColor="black"
-                            overflow="hidden"
-                            _hover={{ boxShadow: "4px 4px 0px rgba(0, 0, 0, 1)", bgGradient: "linear(to-r, yellow, yellow)" }}
+                            // borderWidth="2px"
+                            // borderRadius="0"
+                            // borderColor="black"
+                            // overflow="hidden"
+                            // _hover={{ boxShadow: "4px 4px 0px rgba(0, 0, 0, 1)", bgGradient: "linear(to-r, #DC35AA, #DC35AA)" }}
                         >
                             <Link to={`/events/${sport.id}`} as={ReactRouterLink}>
                                 <Flex direction={{ base: "row", sm: "column" }} align="center">
@@ -61,13 +69,13 @@ function SportsCard({ title, data }) {
                                         </Box>
                                     )}
                                     {shouldDisplay && sport.displayImage && (
-                                        <Box display={['none', 'inline-block']} borderWidth="1px" borderRadius="0" borderColor="black" boxSize="225px" overflow="hidden">
-                                            <Image src={sport.displayImage} boxSize="100%" objectFit="cover" />
+                                        <Box display={['none', 'inline-block']}  boxSize="225px" overflow="hidden">
+                                            <Image src={sport.displayImage} boxSize="full" objectFit="cover" />
                                         </Box>
                                     )}
 
-                                    <Box p={4} ml={{ base: 4, sm: 0 }}>
-                                        <Text fontWeight="normal" fontSize="md">
+                                    <Box p={4} ml={{ base: 4, sm: 0 }} _hover={{ boxShadow: "4px 4px 0px rgba(0, 0, 0, 1)", bgGradient: "linear(to-r, #DC35AA, #DC35AA)" }}>
+                                        <Text fontWeight="normal" fontSize={18}>
                                             {sport.name}
                                         </Text>
                                     </Box>

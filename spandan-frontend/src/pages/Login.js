@@ -83,11 +83,11 @@ export default function Login() {
                             Sign in using your IIITB account
                         </Heading>
 
-                        <Text color="red" fontWeight={"bold"} fontSize={"30"}>
+                        {/* <Text color="red" fontWeight={"bold"} fontSize={"30"}>
                             IMPORTANT: CLICK ON FORGOT PASSWORD IF YOU ARE LOGGING IN FOR THE FIRST TIME
-                        </Text>
+                        </Text> */}
                     </Stack>
-                    <Box bg={useColorModeValue('white', 'gray.700')} border="2px" p={8}>
+                    <Box bg={useColorModeValue('black', 'gray.700')} border="2px" p={8}>
                         <Formik initialValues={{ email: '', password: '', rememberMe: true }} onSubmit={handleSubmit}>
                             {({ isSubmitting }) => (
                                 <Form>
@@ -99,7 +99,7 @@ export default function Login() {
                                                     isRequired
                                                 >
                                                     <FormLabel>Email address</FormLabel>
-                                                    <Input type="email" {...field} border={'1px'} rounded='0' />
+                                                    <Input type="email" {...field} border={'1px'} rounded='0' bgColor={'whiteAlpha.500'} placeholder={'your-email@iiitb.ac.in'} _placeholder={{color:'white'}}/>
                                                     {form.errors.email && form.touched.email && (
                                                         <FormErrorMessage>{form.errors.email}</FormErrorMessage>
                                                     )}
@@ -110,7 +110,7 @@ export default function Login() {
                                             {({ field }) => (
                                                 <FormControl isRequired>
                                                     <FormLabel>Password</FormLabel>
-                                                    <Input type="password" {...field} border={'1px'} rounded='0' />
+                                                    <Input type="password" {...field} border={'1px'} rounded='0' bgColor={'whiteAlpha.500'} placeholder={'**********'} _placeholder={{color:'white'}}/>
                                                 </FormControl>
                                             )}
                                         </Field>
@@ -125,17 +125,17 @@ export default function Login() {
                                                         <Checkbox {...field}>Remember me</Checkbox>
                                                     )}
                                                 </Field> */}
-                                                <Link color={'blue'} as={ReactRouterLink} to={'/forgot'}>
+                                                <Link color={'#DC35AA'} as={ReactRouterLink} to={'/forgot'}>
                                                     Forgot password?
                                                 </Link>
                                             </Stack>
                                             <Button
                                                 type="submit"
                                                 variant="custom"
-                                                bg={'yellow.300'}
-                                                color={'black'}
+                                                bg={'red'}
+                                                color={'white'}
                                                 _hover={{
-                                                    bg: 'yellow.400',
+                                                    bg: 'red.400',
                                                 }}
                                                 alignItems="center"
                                                 as={motion.button}

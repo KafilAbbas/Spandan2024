@@ -59,7 +59,7 @@ const ChangePassword = () => {
             >
                 {({ values, errors, touched }) => (
                     <Form>
-                        <Flex align={'center'} justify={'center'} bg={'white'}>
+                        <Flex align={'center'} justify={'center'} bg={'none'}>
                             <Stack spacing={8} mx={'auto'} minW={{ base: '80vw', lg: '40vw' }} py={4} px={6}>
                                 <Stack align={'center'}>
                                     <Heading fontSize={'4xl'} textAlign={'center'}>
@@ -69,7 +69,7 @@ const ChangePassword = () => {
                                 <Box
                                     border={'2px'}
                                     rounded={'none'}
-                                    bg={"white"}
+                                    bg={"black"}
                                     p={8}
                                 >
                                     <Field name="password">
@@ -81,6 +81,7 @@ const ChangePassword = () => {
                                                         type={'password'}
                                                         {...field}
                                                         border={"1px"}
+                                                        bgColor={'whiteAlpha.500'} placeholder={'**********'} _placeholder={{color:'white'}}
                                                     />
                                                 </InputGroup>
                                             </FormControl>
@@ -96,6 +97,7 @@ const ChangePassword = () => {
                                                         type={showPassword ? 'text' : 'password'}
                                                         {...field}
                                                         border={'1px'}
+                                                        bgColor={'whiteAlpha.500'} placeholder={'**********'} _placeholder={{color:'white'}}
                                                     />
                                                     <InputRightElement h={'full'}>
                                                         <Button
@@ -114,10 +116,10 @@ const ChangePassword = () => {
                                     <Stack spacing={10} pt={4}>
                                         <Button
                                             variant={"custom"}
-                                            bg={'yellow.300'}
+                                            bg={'red'}
                                             color={'black'}
                                             _hover={{
-                                                bg: 'yellow.400',
+                                                bg: 'red.400',
                                             }}
                                             alignItems="center"
                                             type="submit"

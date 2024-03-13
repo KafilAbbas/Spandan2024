@@ -1,11 +1,12 @@
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { Link as ReactRouterLink } from "react-router-dom";
-import { Box, Flex, Heading, Button, Image, Text, useMediaQuery, Link } from "@chakra-ui/react";
+import { Box, Flex, Heading, Button, Image, Text, useMediaQuery, Link, VStack } from "@chakra-ui/react";
 import axios from '../AxiosConfig';
 
 import Container from '../components/Container'
-import TV from "../components/OldTV";
+// import TV from "../components/OldTV";
+import Slideshow from "../components/Slideshow";
 
 const images = [
     "/sports-assets/cricket.png",
@@ -16,7 +17,7 @@ const images = [
 
 const ButtonWithImage = () => {
     const [currentImageIndex, setCurrentImageIndex] = useState(0);
-
+    const [isLoggedIn, setIsLoggedIn] = useState(localStorage.getItem('login'));
     useEffect(() => {
         const intervalId = setInterval(() => {
             setCurrentImageIndex(currentImageIndex => (currentImageIndex + 1) % images.length);
@@ -26,18 +27,27 @@ const ButtonWithImage = () => {
     }, []);
 
     return (
-        <Link _hover={{ textDecoration: "none" }} as={ReactRouterLink} to="/main">
-            <Button variant="custom"
+        <Link _hover={{ textDecoration: "none" }} as={ReactRouterLink} to={isLoggedIn?"/events":"/main"}>
+            <Button variant="link"
                 as={motion.button}
                 whileTap={{ scale: 0.9 }}
-                color={"gray.800"}
+                color={"white.800"}
                 fontFamily="heading"
                 fontSize={"25"}
                 fontWeight={'medium'}
             >
                 <Flex align="center">
                     <Image src={images[currentImageIndex]} boxSize="18px" objectFit="contain" mr={4} />
+                    {isLoggedIn?
+                    (<Text fontSize={"25px"}>Register for a sport Now!</Text>)
+                    // <Text fontSize={"25px"}>(Only For Alumni)</Text>:
+                    :
+                    (<>
+                    <VStack>
                     <Text fontSize={"25px"}>Register Now!</Text>
+                    <Text fontSize={"25px"}>(Only For Alumni)</Text>
+                    </VStack>
+                    </>)}
                 </Flex>
             </Button >
         </Link>
@@ -48,6 +58,7 @@ const ButtonWithImage = () => {
 const Homepage = () => {
     const [imageIndex, setImageIndex] = useState(0);
     const [isLargerThanLg] = useMediaQuery("(min-width: 992px)");
+    
 
     useEffect(() => {
         const interval = setInterval(() => {
@@ -76,14 +87,20 @@ const Homepage = () => {
                     mb={isLargerThanLg ? 0 : 4}
                     align="center"
                 >
+                    <Box background="none" p={4}>
+                <Image src={'Spandan2024he.svg'} height={'180px'} />
+              </Box>
                     <Flex justifyContent="center" mb="8" flexDirection={{ base: "column", md: "row" }} flexWrap="wrap">
-                        <Image src={'Spandan_Logo_B.svg'} w="150px" h="150px" mx={{ base: "auto", md: "0" }} mr={{ md: "2" }} p={4} alt="Logo" />
+                        
                         <Box>
-                            <Heading as="h1" size="2xl" textAlign="center" fontSize={'8vh'} mt={4}>
+                            <Heading fontFamily="akshar"
+                    fontSize={{ base: "5vh", lg: "5vh" }}
+                    fontWeight="bold"
+                    letterSpacing="widest">
                                 SPANDAN
                             </Heading>
                             <Text textAlign="center" fontSize="2xl" mt="2">
-                                17th to 19th March 2023
+                                24th & 25th March 2024
                             </Text>
                         </Box>
                     </Flex>
@@ -92,7 +109,7 @@ const Homepage = () => {
                 {/* <Box mt={{ base: "8vh", md: "6vh", lg: "0" }} ml={"10vw"} />
                 <TV /> */}
                 {isLargerThanLg && <Box ml={"10vw"} />}
-                {isLargerThanLg && <TV />}
+                {isLargerThanLg && <Slideshow photos={imageList} />}
             </Flex>
         </Container >
     );

@@ -7,6 +7,8 @@
     "@chakra-ui/react": "^2.5.1",
     "@emotion/react": "^11.10.6",
     "@emotion/styled": "^11.10.6",
+    "@fontsource/akshar": "^5.0.12",
+    "@fontsource/archivo": "^5.0.17",
     "@fontsource/vt323": "^4.5.10",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",

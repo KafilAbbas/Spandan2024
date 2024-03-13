@@ -59,7 +59,7 @@ export default function ForgotPwd() {
                         {mailSent ?
                             <Text
                                 fontSize={{ base: 'sm', sm: 'md' }}
-                                color="gray.800">
+                                color="white.800">
                                 {
                                     caughtError ? "Looks like an incorrect mail ID is entered. Reach out to spandaniiitb.23@gmail.com for changes" :
                                         "Check your mail for URL to change password. Check your Junk and Microsoft Quarantine for the URL."
@@ -68,12 +68,12 @@ export default function ForgotPwd() {
                             <>
                                 <Text
                                     fontSize={{ base: 'sm', sm: 'md' }}
-                                    color="gray.800">
+                                    color="white.800">
                                     You&apos;ll get an email with a reset link
                                 </Text>
-                                <Stack border="2px" p={8}>
+                                <Stack border="2px" p={8} bgColor={'black'}>
 
-                                    <Formik initialValues={{ email: '' }} onSubmit={handleSubmit}>
+                                    <Formik initialValues={{ email: '' }} onSubmit={handleSubmit} >
                                         {({ isSubmitting }) => (
                                             <Form>
                                                 <Field name="email">
@@ -84,9 +84,10 @@ export default function ForgotPwd() {
                                                                 {...field}
                                                                 border={'1px'}
                                                                 placeholder="your-email@iiitb.ac.in"
-                                                                _placeholder={{ color: 'gray.500' }}
+                                                                _placeholder={{ color: 'white' }}
                                                                 type="email"
                                                                 rounded="0"
+                                                                bgColor={'whiteAlpha.500'}
                                                             />
                                                             <FormErrorMessage>{form.errors.email}</FormErrorMessage>
                                                         </FormControl>
@@ -95,10 +96,10 @@ export default function ForgotPwd() {
                                                 <Stack spacing={6} mt={6}>
                                                     <Button
                                                         variant={"custom"}
-                                                        bg={'yellow.300'}
+                                                        bg={'red'}
                                                         color={'black'}
                                                         _hover={{
-                                                            bg: 'yellow.400',
+                                                            bg: 'red.400',
                                                         }}
                                                         alignItems="center"
                                                         type="submit"

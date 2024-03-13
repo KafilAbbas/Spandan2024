@@ -3,14 +3,14 @@ import { FaEnvelope, FaInstagram } from 'react-icons/fa';
 
 function FooterLink({ href, children }) {
     return (
-        <Link href={href} textDecoration="underline" color="blue" textDecorationThickness="1px" textUnderlineOffset="3px">
+        <Link href={href} textDecoration="underline" color="#DC35AA" textDecorationThickness="1px" textUnderlineOffset="3px">
             <Box as="a">{children}</Box>
         </Link>
     );
 }
 
 function LinkItem(props) {
-    const { icon, children, href, iconColor = 'blue' } = props;
+    const { icon, children, href, iconColor = '#DC35AA' } = props;
     return (
         <HStack rel="noopener" target="_blank">
             <Icon aria-hidden as={icon} fontSize="xl" color={iconColor} />
@@ -23,13 +23,13 @@ function LinkItem(props) {
 
 export default function Footer() {
     return (
-        <Box as="footer" paddingY="4" border={"2px"} borderBottom="hidden" borderLeft={"hidden"} borderRight={"hidden"}>
+        <Box as="footer" paddingY="7" border={"2px"} borderBottom="2px" borderLeft={"hidden"} borderRight={"hidden"} bgColor={'black'}>
             <Box maxWidth="6xl" marginX="auto" paddingX="6">
                 <SimpleGrid columns={{ base: 4, md: 12 }} spacing={{ base: 10, md: 16 }}>
                     <GridItem colSpan={6}>
                         <Box>
                             <Heading marginBottom="4" size="lg">
-                                Spandan '23
+                                Spandan '24
                             </Heading>
                             <Text fontSize="lg">
                                 The annual intra-college sports fest of IIIT Bangalore
