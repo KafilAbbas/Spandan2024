@@ -154,18 +154,18 @@ class CustomUserCreate(APIView):
             return Response(data={'error':str(e)},status=status.HTTP_500_INTERNAL_SERVER_ERROR)
         
     
-
-    def delete(self, request):
-        try:
-            print("hello I am in delete")
-            email = request.data.get('email')
-            user = NewUser.objects.get(email=email)
-            user.delete()
-            return Response({'message': 'User deleted successfully'}, status=status.HTTP_204_NO_CONTENT)
-        except NewUser.DoesNotExist:
-            return Response({'error': 'User not found'}, status=status.HTTP_404_NOT_FOUND)
-        except Exception as e:
-            return Response({'error': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+    # Was created for testing and should not be availble to the users.
+    # def delete(self, request):
+    #     try:
+    #         print("hello I am in delete")
+    #         email = request.data.get('email')
+    #         user = NewUser.objects.get(email=email)
+    #         user.delete()
+    #         return Response({'message': 'User deleted successfully'}, status=status.HTTP_204_NO_CONTENT)
+    #     except NewUser.DoesNotExist:
+    #         return Response({'error': 'User not found'}, status=status.HTTP_404_NOT_FOUND)
+    #     except Exception as e:
+    #         return Response({'error': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
             
 
 
