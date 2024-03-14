@@ -126,7 +126,7 @@ class TeamAPIView(APIView):
             emStr = "You have been added to team "+serializer.data["name"]+ " for sport "+serializer.data["sport"]["name"] + " with members" + lisNames[:-1]
             send_mail(
                 # title:
-                "Spandan 2023: {sport_name} Team Formation Update".format(title="Spandan 2023", sport_name=serializer.data["sport"]["name"]),
+                "Spandan 2024: {sport_name} Team Formation Update".format(title="Spandan 2024", sport_name=serializer.data["sport"]["name"]),
                 # message:
                 emStr,
                 # from:
@@ -165,7 +165,7 @@ class TeamAPIView(APIView):
             emStr = "Your team has been deleted "+serializer.data["name"]+ " for "+serializer.data["sport"]["name"] + " with members" + lisNames[:-1]
             
             send_mail(
-                "Spandan 2023: {sportname} Team Deletion Update".format(title = "Spandan 2023", sportname=serializer.data["sport"]["name"]),
+                "Spandan 2024: {sportname} Team Deletion Update".format(title = "Spandan 2024", sportname=serializer.data["sport"]["name"]),
                 emStr,
                 settings.EMAIL_HOST_USER,
                 # "mail_id",

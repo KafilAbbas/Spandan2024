@@ -92,9 +92,9 @@ DATABASES = {
         # 'ENGINE': 'django.db.backends.sqlite3',
         # 'NAME': BASE_DIR / 'db.sqlite3',
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'spandan_database',
-        'USER': 'rickky',
-        'PASSWORD': 'helloRicky123#',
+        'NAME': 'home',
+        'USER': 'kafil',
+        'PASSWORD': 'Hello@1234',
         'HOST': 'localhost',
         'PORT': '3306',
     }

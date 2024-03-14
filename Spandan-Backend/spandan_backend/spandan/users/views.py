@@ -98,7 +98,27 @@ class CustomOtpVerifiy_userCreate(APIView):
             return Response({'error': 'Internal server error.please try again'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
             
 
+class GetUser(APIView):
+    permission_classes = [AllowAny]
+    authentication_classes = ()
+    def get(self,request,format = 'json'):
+        from rest_framework_simplejwt.backends import TokenBackend
+        from django.contrib.auth import get_user_model
 
+        roll_Num = request.query_params['rollNum']
+                
+        try:
+            userr = NewUser.objects.get(rollNum=roll_Num)
+            serializer = CustomUserSerializer(userr)
+            return Response(serializer.data,status = status.HTTP_200_OK)
+        
+        except ObjectDoesNotExist:
+            return Response({'error': 'User with this Roll Number does not exist'}, status=status.HTTP_404_NOT_FOUND)
+        
+        except Exception as e:
+            print(e)
+            return Response(data={'error':str(e)},status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+        
 
 
 class CustomUserCreate(APIView):
