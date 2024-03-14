@@ -39,10 +39,13 @@ class TeamForm(forms.ModelForm):
                     tteams = userr.teams.all()
                     # print(tteams)
                     MajorCat = set()
+                    MinorCat = set()
                     inSportsNames = []
                     for tt in tteams:
                         if tt.sport.category != "NonMajor":
                             MajorCat.add(tt.sport.category)
+                        else:
+                            MinorCat.add(tt.sport.category)
                         inSportsNames.append(tt.sport.name)
                     print("hii")
 
@@ -50,8 +53,13 @@ class TeamForm(forms.ModelForm):
                         retst = "Given team member:"+ str(member.user_name)  +" is already in 4 teams "
                         print(retst)
                         raise forms.ValidationError(retst)
-                    print(sport.name,inSportsNames)
 
+                    elif sport.category=="NonMajor" and len(MinorCat) >= 5:
+                        retst = "Given team member:"+ str(member.user_name)  +" is already in 5 minor sports teams"
+                        print(retst)
+                        raise forms.ValidationError(retst)
+
+                    print(sport.name,inSportsNames)
                     if sport.name in inSportsNames:
                         retst = "Given team member:"+ str(member.user_name) +" is already registered for this sport "
                         print(retst)
