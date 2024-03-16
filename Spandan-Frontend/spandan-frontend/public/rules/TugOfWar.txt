@@ -1,15 +1,16 @@
-● Each team in a Tug of War competition consists of eight people.
-● There are various weight classifications in Tug of War, and the mass of the eight people combined must not weigh more than that determined by the category that they are placed in.
-● The rope used should be of a circumference of approximately 11 cm and should be marked in the middle with a center line as well as two marks that should be placed 4m from the center line.
-● At the start of the pull, the center line of the rope should be immediately above line marked on the ground.
-● Both teams pull the rope, the winner being the team who manage to pull the mark on the rope closest to their opponents over the center line.
-● The rope must be pulled underarm and nobody’s elbow must go below the knee, otherwise a foul will be called.
-● Touching the ground for a longer period of time is also considered as a foul.
-● Matches are often a best of three pull, the winner winning two out of the three pulls.
-● No cleats or gloves will be allowed at the event. No anchoring, looping around the end of the rope will be allowed.
-● Teams will not be allowed to dig in and get set. There will be a one-minute time limit per tug.
-● If no team has been pulled over the line at the end of the one minute time limit, the tug will go to the team who has the advantage at that time.
-
-○ NOTE: If it is the tie-breaker round, then there will be no time limit, the winner being the team who manage to pull the mark on the rope closest to their opponents over the center line.
-● If a member of the team falls down that member is given a caution. Each team is allowed two cautions before getting disqualified.
-● Team members are not allowed to tie the rope around their bodies. Only acceptable way to pull the rope is with your hands.
+Tug of War
+● Rules
+○Maximum number of players in a team is 7(5+2).
+○Playing team - 5 players
+○Substitutions - 2 players
+○Maximum weight per Playing team is 350kg.
+○No gloves or shoes with spikes are allowed(which includes football
+studs) Barefoot is allowed.
+○Chalk powder will be provided.
+○Both teams must pull only after the signal provided by the referee.
+○Both teams must have an equal number of players.
+○Substitutions are allowed on the condition that the total weight of the
+playing team remains below the maximum limit.
+● Scoring
+○ There will be 3 rounds. Winning any 2 rounds of these 3 rounds will
+qualify you to the next round. Otherwise you are disqualified

@@ -130,7 +130,7 @@ const sd = () => {
             "rules": "/rules/Throwball.txt ",
             "rulesURL": "../../rulespdf/Throwball(Mixed).pdf",
             "spoc": [{ "spoc_name": "Yukta ", "spoc_contact": "7022095151" }, { "spoc_name": "Ankrutee ", "spoc_contact": "9246809610" }],
-            "requirements": { "min_players": 7, "max_players": 9, "min_female": 2, "max_female": 9 }
+            "requirements": { "min_players": 8, "max_players": 10, "min_female": 2, "max_female": 9 }
         },
         {
             "id": 12,
@@ -262,7 +262,7 @@ const sd = () => {
             "rules": "/rules/GullyCricket.txt ",
             "rulesURL": "../../rulespdf/GullyCricket.pdf",
             "spoc": [{ "spoc_name": "Allu Pavan Karthik Reddy", "spoc_contact": "7795933534" }, { "spoc_name": "Heet Vasani", "spoc_contact": "9409732131" }],
-            "requirements": { "min_players": 5, "max_players": 5, "min_female": 1, "max_female": 5 }
+            "requirements": { "min_players": 5, "max_players": 6, "min_female": 1, "max_female": 6 }
         },
         {
             "id": 23,
@@ -290,26 +290,26 @@ const sd = () => {
         },
         {
             "id": 25,
-            "name": "Gym Men",
-            "tag": "Gym",
+            "name": "Powerlifting Men",
+            "tag": "Powerlifting",
             "type": "minor",
             "icon": "/sportsicons/Gym.png",
             "displayImage": "/sportsdisplay/Gym.gif",
-            "rules": "/rules/Gym.txt ",
-            "rulesURL": "../../rulespdf/Gym.pdf",
+            "rules": "/rules/Spandan_Powerlifting.txt ",
+            "rulesURL": "../../rulespdf/Spandan_powerlifting.pdf",
             "spoc": [{ "spoc_name": "Sparsh", "spoc_contact": "9479644539" },
             { "spoc_name": "Vidhu Arora", "spoc_contact": "9501969884" }],
             "requirements": { "min_players": 1, "max_players": 1, "min_female": 0, "max_female": 0 }
         },
         {
             "id": 26,
-            "name": "Gym Women",
-            "tag": "Gym-W",
+            "name": "Powerlifting Women",
+            "tag": "Powerlifting-W",
             "type": "minor",
             "icon": "/sportsicons/Gym.png",
             "displayImage": "/sportsdisplay/Gym-W.gif",
-            "rules": "/rules/Gym.txt ",
-            "rulesURL": "../../rulespdf/Gym.pdf",
+            "rules": "/rules/Spandan_Powerlifting.txt ",
+            "rulesURL": "../../rulespdf/Spandan_powerlifting.pdf",
             "spoc": [{ "spoc_name": "Sparsh", "spoc_contact": "9479644539" },
             { "spoc_name": "Vidhu Arora", "spoc_contact": "9501969884" }],
             "requirements": { "min_players": 1, "max_players": 1, "min_female": 1, "max_female": 1 }
@@ -337,7 +337,7 @@ const sd = () => {
             "rulesURL": "../../rulespdf/TugOfWar.pdf",
             "spoc": [{ "spoc_name": "Sparsh", "spoc_contact": "9479644539" },
             { "spoc_name": "Vidhu Arora", "spoc_contact": "9501969884" }],
-            "requirements": { "min_players": 8, "max_players": 10, "min_female": 0, "max_female": 10 }
+            "requirements": { "min_players": 5, "max_players": 7, "min_female": 0, "max_female": 0 }
         },
         {
             "id": 29,
@@ -350,7 +350,7 @@ const sd = () => {
             "rulesURL": "../../rulespdf/TugOfWar.pdf",
             "spoc": [{ "spoc_name": "Sparsh", "spoc_contact": "9479644539" },
             { "spoc_name": "Vidhu Arora", "spoc_contact": "9501969884" }],
-            "requirements": { "min_players": 8, "max_players": 10, "min_female": 8, "max_female": 10 }
+            "requirements": { "min_players": 5, "max_players": 7, "min_female": 5, "max_female": 7 }
         },
         {
             "id": 30,
@@ -362,7 +362,7 @@ const sd = () => {
             "rules": "/rules/Tennis.txt ",
             "rulesURL": "../../rulespdf/Tennis.pdf",
             "spoc": [{ "spoc_name": "Vikas K", "spoc_contact": "8762175731" }, { "spoc_name": "Kalyan ", "spoc_contact": "9701682407" }],
-            "requirements": { "min_players": 1, "max_players": 1, "min_female": 0, "max_female": 0 }
+            "requirements": { "min_players": 1, "max_players": 1, "min_female": 0, "max_female": 1 }
         },
         {
             "id": 31,
@@ -374,7 +374,7 @@ const sd = () => {
             "rules": "/rules/Tennis.txt ",
             "rulesURL": "../../rulespdf/Tennis.pdf",
             "spoc": [{ "spoc_name": "Vikas K", "spoc_contact": "8762175731" }, { "spoc_name": "Kalyan ", "spoc_contact": "9701682407" }],
-            "requirements": { "min_players": 2, "max_players": 2, "min_female": 0, "max_female": 0 }
+            "requirements": { "min_players": 2, "max_players": 2, "min_female": 0, "max_female": 2 }
         },
         {
             "id": 32,
@@ -387,6 +387,32 @@ const sd = () => {
             "rulesURL": "../../rulespdf/BGMI.pdf",
             "spoc": [{ "spoc_name": "Rutul Patel ", "spoc_contact": "87589 87403" },{ "spoc_name": "Rishi Patel", "spoc_contact": "83206 00705" }],
             "requirements": { "min_players": 5, "max_players": 5, "min_female": 0, "max_female": 5 }
+        },
+        {
+            "id": 33,
+            "name": "Pentathlon Men",
+            "tag": "Pentathlon",
+            "type": "minor",
+            "icon": "/sportsicons/Gym.png",
+            "displayImage": "/sportsdisplay/Pentathlon.png",
+            "rules": "/rules/Pentathlon.txt ",
+            "rulesURL": "../../rulespdf/Pentathlon.pdf",
+            "spoc": [{ "spoc_name": "Sparsh", "spoc_contact": "9479644539" },
+            { "spoc_name": "Vidhu Arora", "spoc_contact": "9501969884" }],
+            "requirements": { "min_players": 1, "max_players": 1, "min_female": 0, "max_female": 0 }
+        },
+        {
+            "id": 34,
+            "name": "Pentathlon Women",
+            "tag": "Pentathlon-W",
+            "type": "minor",
+            "icon": "/sportsicons/Gym.png",
+            "displayImage": "/sportsdisplay/Pentathlon.png",
+            "rules": "/rules/Pentathlon.txt ",
+            "rulesURL": "../../rulespdf/Pentathlon.pdf",
+            "spoc": [{ "spoc_name": "Sparsh", "spoc_contact": "9479644539" },
+            { "spoc_name": "Vidhu Arora", "spoc_contact": "9501969884" }],
+            "requirements": { "min_players": 1, "max_players": 1, "min_female": 1, "max_female": 1 }
         },
     ]
 }
