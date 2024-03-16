@@ -26,17 +26,19 @@ objects = [
     {"name": "CodM", "category": "NonMajor", "min_team_size": 5, "max_team_size": 5, "min_females": 0, "min_males": 5},
     {"name": "Fifa-S", "category": "NonMajor", "min_team_size": 1, "max_team_size": 1, "min_females": 0, "min_males": 1},
     {"name": "Fifa-D", "category": "NonMajor", "min_team_size": 2, "max_team_size": 2, "min_females": 0, "min_males": 2},
-    {"name": "GullyCricket", "category": "NonMajor", "min_team_size": 5, "max_team_size": 5, "min_females": 1, "min_males": 5},
+    {"name": "GullyCricket", "category": "NonMajor", "min_team_size": 5, "max_team_size": 6, "min_females": 1, "min_males": 5},
     {"name": "ClashRoyale", "category": "NonMajor", "min_team_size": 1, "max_team_size": 1, "min_females": 0, "min_males": 0},
     {"name": "BGMI", "category": "NonMajor", "min_team_size": 1, "max_team_size": 4, "min_females": 0, "min_males": 0},
     {"name": "Chess", "category": "NonMajor", "min_team_size": 1, "max_team_size": 1, "min_females": 0, "min_males": 1},
     {"name": "Gym", "category": "NonMajor", "min_team_size": 1, "max_team_size": 1, "min_females": 0, "min_males": 0},
-    {"name": "Gym-W", "category": "NonMajor", "min_team_size": 4, "max_team_size": 5, "min_females": 4, "min_males": 5},
+    {"name": "Gym-W", "category": "NonMajor", "min_team_size": 1, "max_team_size": 1, "min_females": 1, "min_males": 0},
     {"name": "Carroms", "category": "NonMajor", "min_team_size": 2, "max_team_size": 2, "min_females": 0, "min_males": 2},
-    {"name": "TugOfWar", "category": "NonMajor", "min_team_size": 8, "max_team_size": 10, "min_females": 0, "min_males": 10},
-    {"name": "TugOfWar-W", "category": "NonMajor", "min_team_size": 8, "max_team_size": 10, "min_females": 8, "min_males": 10},
+    {"name": "TugOfWar", "category": "NonMajor", "min_team_size": 5, "max_team_size": 7, "min_females": 0, "min_males": 7},
+    {"name": "TugOfWar-W", "category": "NonMajor", "min_team_size": 5, "max_team_size": 7, "min_females": 5, "min_males": 0},
     {"name": "Tennis-MS", "category": "Tennis", "min_team_size": 1, "max_team_size": 1, "min_females": 0, "min_males": 0},
     {"name": "Tennis-MD", "category": "Tennis", "min_team_size": 2, "max_team_size": 2, "min_females": 0, "min_males": 0},
+    {"name": "Pentathlon", "category": "NonMajor", "min_team_size": 1, "max_team_size": 1, "min_females": 0, "min_males": 0},
+    {"name": "Pentathlon-W", "category": "NonMajor", "min_team_size": 1, "max_team_size": 1, "min_females": 0, "min_males": 0},
 ]
 
 # Iterate over each object and send a POST request
