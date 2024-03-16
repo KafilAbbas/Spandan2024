@@ -1,7 +1,8 @@
 import React from 'react'
 import {
     useColorMode,
-    Flex
+    Flex,
+    useMediaQuery
 } from '@chakra-ui/react'
 
 import Navbar from "./Navbar"
@@ -9,6 +10,7 @@ import Footer from "./Footer";
 import SEOComponent from './SEO';
 
 const Container = ({ page_name, children }) => {
+    const [isDesktop] = useMediaQuery('(min-width:1024px)');
     return (
         <>
             <SEOComponent page_name={page_name} />
@@ -16,8 +18,8 @@ const Container = ({ page_name, children }) => {
             <Flex
                 as="main"
                 align="center"
-                justify={{ base: "center", md: "around" }}
-                direction={{ base: "column-reverse", md: "row" }}
+                justify={!isDesktop?'around':'center'}
+                direction={isDesktop?'row':'column-reverse'}
                 wrap="no-wrap"
                 minH="60vh"
                 px={8}

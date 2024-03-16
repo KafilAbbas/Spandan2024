@@ -146,7 +146,7 @@ class CustomUserCreate(APIView):
                     return Response({'error': 'Failed to send OTP email. Please try again later.'},
                                 status=status.HTTP_500_INTERNAL_SERVER_ERROR)
                 
-                return Response({'message' : "Otp has been sent to you", 'data' : otp_verification_data}, status=status.HTTP_200_OK)
+                return Response({'message' : "Otp has been sent to you"}, status=status.HTTP_200_OK)
             
 
         except Exception as e:

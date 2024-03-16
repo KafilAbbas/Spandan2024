@@ -1,4 +1,4 @@
-import { Box, Flex, Icon, Heading, Image, Text, Divider, Stack, Button, Center, HStack, Link as ChakraLink } from "@chakra-ui/react";
+import { Box, Flex, Icon, Heading, Image, Text, Divider, Stack, Button, Center, HStack, Link as ChakraLink, useMediaQuery } from "@chakra-ui/react";
 import { Link, useParams } from "react-router-dom";
 import { ExternalLinkIcon } from '@chakra-ui/icons';
 import { useState, useEffect } from "react";
@@ -60,6 +60,7 @@ const Event = () => {
         }
     }, []);
 
+    const [isDesktop] = useMediaQuery("(min-width: 1024px)");
 
     return (
         <Container page_name={sport.name} >
@@ -70,18 +71,17 @@ const Event = () => {
                 </Box>
                 <Divider />
                 <Box pb={4} />
-                <Stack direction={{ base: "column-reverse", lg: "row" }} ml={{ base: "0", lg: "8" }} spacing={8}>
+                <Stack direction={!isDesktop ? "column-reverse" : "row"} ml={!isDesktop ? "0" : "8"} spacing={8}>
                     <Stack >
-                        <Box width={{ base: "100%", lg: "38vw" }}>
+                        <Box width={!isDesktop ? "100%" : "38vw"}>
                             <HStack>
                                 <Heading as="h2" size="lg" p={1}>Rules</Heading>
-                                {/* <ChakraLink href={`${process.env.PUBLIC_URL}${sport.rulesURL}`} isExternal> */}
                                 <ChakraLink href={`${sport.rulesURL}`} isExternal>
                                     <ExternalLinkIcon color='black' _hover={{ color: "pink" }} />
                                 </ChakraLink>
                             </HStack>
-                            <Box maxHeight={{ base: "80vh", md: "50vh" }} overflowY="auto" border={"1px"}>
-                                <Text whiteSpace="pre-wrap" fontSize={{ base: "sm", md: "normal" }} p={2}  bgColor={'black'}>
+                            <Box maxHeight={!isDesktop ? "80vh" : "50vh"} overflowY="auto" border={"1px"}>
+                                <Text whiteSpace="pre-wrap" fontSize={!isDesktop ? "sm" : "normal"} p={2} bgColor={'black'}>
                                     {rules}
                                 </Text>
                             </Box>
@@ -92,46 +92,32 @@ const Event = () => {
                                         {spoc_obj.spoc_name} - {spoc_obj.spoc_contact}
                                     </Text>
                                 ))}
-
                             </Box>
                         </Box>
                     </Stack>
                     <Stack>
-                        <Box width={{ base: "100%", lg: "55vw" }} pl={{ base: "0", lg: "8" }} >
-                            {!isLoggedIn && <Center>
-                                <Stack spacing={8} mx={'auto'} px={6}>
-                                    <Stack spacing={4}>
-                                        <Heading fontSize={'3xl'}>
-                                            Login to create team
-                                        </Heading>
-                                        <Text align={'center'}
-                                            fontSize={{ base: 'sm', sm: 'md' }}
-                                            color={'white'}>
-                                            Looks like you havent logged in yet
-                                        </Text>
-
-                                        <Stack spacing={6}>
-                                            <Link to="/login">
-                                                <Button
-                                                    variant={"custom"}
-                                                    bg={'red'}
-                                                    color={'black'}
-                                                    _hover={{
-                                                        bg: 'red.400',
-                                                    }}
-                                                    alignItems="center"
-                                                    type="submit"
-                                                    whileTap={{ scale: 0.9 }}
-                                                    rounded='0'
-                                                    w="100%"
-                                                >
-                                                    Login
-                                                </Button>
-                                            </Link>
+                        <Box width={!isDesktop ? "100%" : "55vw"} pl={!isDesktop ? "0" : "8"}>
+                            {!isLoggedIn && (
+                                <Center>
+                                    <Stack spacing={8} mx={'auto'} px={6}>
+                                        <Stack spacing={4}>
+                                            <Heading fontSize={'3xl'}>
+                                                Login to create team
+                                            </Heading>
+                                            <Text align={'center'} fontSize={{ base: 'sm', sm: 'md' }} color={'white'}>
+                                                Looks like you haven't logged in yet
+                                            </Text>
+                                            <Stack spacing={6}>
+                                                <Link to="/login">
+                                                    <Button variant={"custom"} bg={'red'} color={'black'} _hover={{ bg: 'red.400' }} alignItems="center" type="submit" whileTap={{ scale: 0.9 }} rounded='0' w="100%">
+                                                        Login
+                                                    </Button>
+                                                </Link>
+                                            </Stack>
                                         </Stack>
                                     </Stack>
-                                </Stack>
-                            </Center>}
+                                </Center>
+                            )}
                             {isLoggedIn && !hasTeam && <CreateTeam sport_id={sport_id} />}
                             {isLoggedIn && hasTeam && <ListTeam sport_id={sport_id} team={team} />}
                         </Box>

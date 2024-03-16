@@ -92,9 +92,9 @@ DATABASES = {
         # 'ENGINE': 'django.db.backends.sqlite3',
         # 'NAME': BASE_DIR / 'db.sqlite3',
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'home',
-        'USER': 'kafil',
-        'PASSWORD': 'Hello@1234',
+        'NAME': 'spandan_database',
+        'USER': 'admin',
+        'PASSWORD': 'Thanks@123!!',
         'HOST': 'localhost',
         'PORT': '3306',
     }
@@ -167,7 +167,8 @@ CORS_ALLOWED_ORIGINS = [
 ALLOWED_HOSTS = [
     "localhost",
     "127.0.0.1",
-    "spandan.iiitb.ac.in"
+    "spandan.iiitb.ac.in",
+    "119.161.98.78"
 ]
 AUTH_USER_MODEL = "users.NewUser"
 

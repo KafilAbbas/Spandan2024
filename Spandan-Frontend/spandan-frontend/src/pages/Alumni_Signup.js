@@ -32,7 +32,7 @@ import { MdArrowBack } from 'react-icons/md';
 const Alumni_Signup = () => {
     const [showPassword, setShowPassword] = useState(false);
     const [isSubmitting, setSubmitting] = useState(false)
-    const [isMobile] = useMediaQuery("(max-width: 768px)");
+    const [isDesktop] = useMediaQuery("(min-width: 1024px)");
     const handleRefresh = () => {
         window.location.reload();
     };
@@ -59,7 +59,7 @@ const Alumni_Signup = () => {
         {
             value = value.toUpperCase();
         }
-        console.log(value);
+        // console.log(value);
         return error;
     };
     const validatePhone = (value) => {
@@ -182,7 +182,7 @@ const Alumni_Signup = () => {
                     <Form>
                         <Flex align={'center'} justify={'center'} bg={'none'}>
                             <Stack spacing={8} mx={'auto'} minW={'40vw'} py={12} px={6}>
-                            { isMobile?
+                            { !isDesktop?
                                 <>
                                     <Stack align={'center'} direction="row" spacing={5}>
                                        

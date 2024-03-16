@@ -1,4 +1,4 @@
-import { Box, Flex, GridItem, Heading, HStack, SimpleGrid, Text, Link, Icon, StackDivider, Divider } from '@chakra-ui/react';
+import { Box, Flex, GridItem, Heading, HStack, SimpleGrid, Text, Link, Icon, StackDivider, Divider,useMediaQuery } from '@chakra-ui/react';
 import { FaEnvelope, FaInstagram } from 'react-icons/fa';
 
 function FooterLink({ href, children }) {
@@ -22,10 +22,11 @@ function LinkItem(props) {
 }
 
 export default function Footer() {
+    const [isDesktop] = useMediaQuery('(min-width: 1024px)');
     return (
         <Box as="footer" paddingY="7" border={"2px"} borderBottom="2px" borderLeft={"hidden"} borderRight={"hidden"} bgColor={'black'}>
             <Box maxWidth="6xl" marginX="auto" paddingX="6">
-                <SimpleGrid columns={{ base: 4, md: 12 }} spacing={{ base: 10, md: 16 }}>
+                <SimpleGrid columns={isDesktop?12:4} spacing={isDesktop?16:10}>
                     <GridItem colSpan={6}>
                         <Box>
                             <Heading marginBottom="4" size="lg">

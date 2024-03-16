@@ -9,7 +9,7 @@ import { MdArrowBack } from 'react-icons/md';
 import SEOComponent from '../../components/SEO';
 const Main = () => {
   const [selectedButton, setSelectedButton] = useState(null);
-  const [isMobile] = useMediaQuery("(max-width: 768px)");
+  const [isDesktop] = useMediaQuery("(min-width: 1024px)");
   const navigate = useNavigate();
   const handleButtonClick = (button) => {
     setSelectedButton(button);
@@ -22,13 +22,13 @@ const Main = () => {
     <SEOComponent page_name={'Sign Up'} />
     <div style={{ height: '100vh', width: '100vw' }}>
       <Grid
-        h={isMobile && selectedButton ? '100%' : '100vh'} // Set height dynamically based on isMobile state and selected button
-        templateRows={isMobile && selectedButton ? '1fr' : 'repeat(2, 1fr)'}
+        h={!isDesktop && selectedButton ? '100%' : '100vh'} // Set height dynamically based on !isDesktop state and selected button
+        templateRows={!isDesktop && selectedButton ? '1fr' : 'repeat(2, 1fr)'}
         templateColumns='repeat(5, 1fr)'
         gap={4}
       >
-        {!isMobile || !selectedButton ? (
-          <GridItem rowSpan={isMobile ? 10 : 2} colSpan={isMobile ? 20 : 2}>
+        {!!isDesktop || !selectedButton ? (
+          <GridItem rowSpan={!isDesktop ? 10 : 2} colSpan={!isDesktop ? 20 : 2}>
             <VStack
               spacing={20}
               align='stretch'
@@ -51,7 +51,7 @@ const Main = () => {
             </VStack>
           </GridItem>
         ) : null}
-        {!isMobile && !selectedButton && (
+        {!!isDesktop && !selectedButton && (
           <GridItem
             rowSpan={1}
             colSpan={3}
@@ -64,7 +64,7 @@ const Main = () => {
             </Flex>
           </GridItem>
         )}
-        {!isMobile && selectedButton && (
+        {!!isDesktop && selectedButton && (
           <GridItem
             rowSpan={1}
             colSpan={3}
@@ -81,7 +81,7 @@ const Main = () => {
             ) : null}
           </GridItem>
         )}
-        {isMobile && selectedButton === "Alumni" && (
+        {!isDesktop && selectedButton === "Alumni" && (
           <GridItem
             rowSpan={1}
             colSpan={5}
@@ -92,7 +92,7 @@ const Main = () => {
             <Alumni_Signup />
           </GridItem>
         )}
-        {/* {isMobile && selectedButton === "Student" && (
+        {/* {!isDesktop && selectedButton === "Student" && (
           <GridItem
             rowSpan={1}
             colSpan={5}
@@ -103,7 +103,7 @@ const Main = () => {
             <Signup />
           </GridItem>
         )} */}
-        {/* {isMobile && selectedButton === "Staff" && (
+        {/* {!isDesktop && selectedButton === "Staff" && (
           <GridItem
             rowSpan={1}
             colSpan={5}

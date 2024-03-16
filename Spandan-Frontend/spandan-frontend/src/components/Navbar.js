@@ -15,6 +15,7 @@ import {
     useDisclosure,
     useBreakpointValue,
     Center,
+    useMediaQuery
 } from "@chakra-ui/react";
 import axios from '../AxiosConfig';
 import { useNavigate } from "react-router-dom";
@@ -32,12 +33,13 @@ const items = [
 ];
 
 const Logo = () => {
+    const [isDesktop] = useMediaQuery("(min-width: 1024px)");
     return (
-        <Stack align={"center"} justify={"space-around"} w={{ base: "70vw", md: "280px" }} h='inherit' borderRight={'inherit'}>
+        <Stack align={"center"} justify={"space-around"} w={isDesktop?'280px':'70vw'} h='inherit' borderRight={'inherit'}>
             < Link href="/" _hover={{ textDecoration: "none" }} >
                 <Text
                     fontFamily="akshar"
-                    fontSize={{ base: "5vh", lg: "5vh" }}
+                    fontSize={'5vh'}
                     fontWeight="bold"
                     letterSpacing="widest"
                 >
@@ -52,7 +54,7 @@ const ProfileBlock = () => {
     const [isOpen, setIsOpen] = useState(false);
     const [user, setUser] = useState(null);
     const navigate = useNavigate();
-
+    const [isDesktop] = useMediaQuery("(min-width: 1024px)");
     useEffect(() => {
         axios.get('/user/create/', { params: { "email": localStorage.getItem("email") } })
             .then((res) => {
@@ -88,7 +90,7 @@ const ProfileBlock = () => {
             >
                 <Blockies seed="Random Name" scale={3} color="blue" bgColor="red" spotColor="blue" className="identicon" />
                 <Box marginLeft="1rem">
-                    <Text fontFamily="heading" fontSize={"25"} fontWeight={'normal'}>{user.user_name}</Text>
+                    <Text fontFamily="heading" fontSize={"25"} fontWeight={'normal'}>{user.user_name.length > 10 ? `${user.user_name.substring(0, 10)}...` : user.user_name}</Text>
                 </Box>
             </Button>
         </Link>
@@ -97,6 +99,7 @@ const ProfileBlock = () => {
 
 function NavItem(props) {
     const { children, icon, active, href, large } = props;
+    const [isDesktop] = useMediaQuery("(min-width: 1024px)");
     return (
         <Link href={href} _hover={{ textDecoration: "none" }}>
             <HStack
@@ -107,7 +110,7 @@ function NavItem(props) {
 
             >
                 <Icon as={icon} />
-                <Text fontFamily="heading" fontWeight="medium" fontSize={{ base: "20px", md: "35px" }}>{children}</Text>
+                <Text fontFamily="heading" fontWeight="medium" fontSize={!isDesktop?"20px":"35px"}>{children}</Text>
             </HStack>
         </Link >
     );
@@ -115,7 +118,7 @@ function NavItem(props) {
 
 function DesktopNavItemGroup(props) {
     const [activeIndex, setActiveIndex] = useState(-1);
-
+    const [isDesktop] = useMediaQuery("(min-width: 1024px)");
     const handleNavItemClick = (index) => {
         setActiveIndex(index);
     };
@@ -172,6 +175,7 @@ function DesktopNavItemGroup(props) {
 }
 
 function MobileNavItemGroup(props) {
+    const [isDesktop] = useMediaQuery("(min-width: 1024px)");
     return (
         <Stack
             as="nav"
@@ -227,11 +231,11 @@ function MobileNavItemGroup(props) {
 
 function MobileNavMenu(props) {
     const menu = useDisclosure();
-
+    const [isDesktop] = useMediaQuery("(min-width: 1024px)");
     const breakpoint = useBreakpointValue({ base: true, md: false });
 
     useEffect(() => {
-        if (menu.isOpen && !breakpoint) {
+        if (menu.isOpen && breakpoint) {
             menu.onClose();
         }
     }, [breakpoint, menu]);
@@ -239,7 +243,7 @@ function MobileNavMenu(props) {
     return (
         <HStack as="nav" aria-label="Main navigation" justify="space-around" spacing="2" {...props}>
             <Center
-                display={{ base: 'flex', md: 'none' }}
+                display={isDesktop?'none':'flex'}
                 as="button"
                 aria-haspopup="true"
                 aria-expanded={menu.isOpen}
@@ -264,12 +268,12 @@ function MobileNavMenu(props) {
 
 export default function Navbar() {
     const [isAuthenticated, setIsAuthenticated] = useState(localStorage.getItem('login'));
-
+    const [isDesktop] = useMediaQuery("(min-width: 1024px)");
     return (
         <Flex layerStyle="floating" align="center" h={'15vh'}>
             <Logo />
-            <DesktopNavItemGroup display={{ base: 'none', md: 'flex' }} flex="1" isAuthenticated={isAuthenticated} />
-            <MobileNavMenu display={{ base: 'flex', md: 'none' }} flex="1" isAuthenticated={isAuthenticated} />
+            <DesktopNavItemGroup display={isDesktop?'flex':'none'} flex="1" isAuthenticated={isAuthenticated} />
+            <MobileNavMenu display={!isDesktop?'flex':'none'} flex="1" isAuthenticated={isAuthenticated} />
         </Flex >
     );
 }

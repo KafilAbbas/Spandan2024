@@ -1,4 +1,4 @@
-import { Grid, GridItem, Stack, Flex, Heading, Text, VStack, Image, Box, Button } from "@chakra-ui/react";
+import { Grid, GridItem, Stack, Flex, Heading, Text, VStack, Image, Box, Button ,useMediaQuery} from "@chakra-ui/react";
 import React, { useEffect, useState } from "react";
 
 import Blockies from "react-18-blockies";
@@ -43,6 +43,7 @@ const EventSchedule = ({ schedule }) => {
 
 const EventsUserIsParticipatingIn = ({ events }) => {
     const sportsData = sd();
+    const [isDesktop] = useMediaQuery('(min-width: 1024px)');
     return (
         <Stack py={8}>
             <Text fontSize="xl" fontWeight="bold" pb={2} mt={8}>
@@ -50,13 +51,13 @@ const EventsUserIsParticipatingIn = ({ events }) => {
             </Text>
 
             <Box
-                minW={{ base: "90vw", md: "10vw", lg: "25vw" }}
-                h={{ base: "auto", lg: "30vh" }}
+                minW={isDesktop?'25vw':'90vw'}
+                h={isDesktop?'30vh':'auto'}
                 overflowY="auto"
             >
                 {events.length > 0 ? (
                     <Grid
-                        templateColumns={{ base: "repeat(2, 1fr)", md: "repeat(3, 1fr)" }}
+                        templateColumns={isDesktop?'repeat(2,1fr)':'repeat(3,1fr)'}
                         gap={8}
                         pr={4}
                     >
@@ -149,7 +150,7 @@ const UserProfilePage = () => {
     const [events, setEvents] = useState();
     // const [schedule, setSchedule] = useState(null);
     const navigate = useNavigate()
-
+    const [isDesktop] = useMediaQuery('(min-width: 1024px)');
     useEffect(() => {
         axios.get('/user/create/', { params: { "email": localStorage.getItem("email") } })
             .then((res) => {
@@ -199,18 +200,18 @@ const UserProfilePage = () => {
             </Stack> */}
 
             <Flex
-                direction={{ base: `column`, lg: `row` }}
+                direction={isDesktop?'row':'column'}
                 alignItems='center'
                 my={{ xl: '16' }}
                 spacing={"10vw"}
             >
                 <UserDetails user={userd} />
-                <Box w={{ base: "0", md: "10vw" }} />
+                <Box w={isDesktop?'10vw':'0'} />
                 <Flex
                     alignSelf='center'
                     direction='column'
-                    pl={{ base: 0, lg: 10 }}
-                    my={{ base: 10, lg: 0 }}
+                    pl={isDesktop?10:0}
+                    my={!isDesktop?10:0}
                 >
                     <EventsUserIsParticipatingIn events={events} />
                 </Flex>
